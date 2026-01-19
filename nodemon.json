@@ -1,0 +1,6 @@
+{
+    "watch": ["app/**","resources/views/**","server.ts","routes/**"],
+    "ext": ".ts,.js,.svelte",
+    "ignore": [],
+    "exec": "tsx -r dotenv/config server.ts"
+  }

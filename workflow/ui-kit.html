@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GateKeeper - UI Design System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#EEF2FF',
+                            100: '#E0E7FF',
+                            200: '#C7D2FE',
+                            300: '#A5B4FC',
+                            400: '#818CF8',
+                            500: '#6366F1',
+                            600: '#4F46E5',
+                            700: '#4338CA',
+                            800: '#3730A3',
+                            900: '#312E81',
+                        },
+                        secondary: {
+                            50: '#ECFDF5',
+                            100: '#D1FAE5',
+                            200: '#A7F3D0',
+                            300: '#6EE7B7',
+                            400: '#34D399',
+                            500: '#10B981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065F46',
+                            900: '#064E3B',
+                        },
+                        success: {
+                            DEFAULT: '#10B981',
+                            surface: '#D1FAE5',
+                        },
+                        warning: {
+                            DEFAULT: '#F59E0B',
+                            surface: '#FEF3C7',
+                        },
+                        error: {
+                            DEFAULT: '#EF4444',
+                            surface: '#FEE2E2',
+                        },
+                        info: {
+                            DEFAULT: '#3B82F6',
+                            surface: '#DBEAFE',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'sm': '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '24px',
+                        '2xl': '32px',
+                    },
+                    boxShadow: {
+                        'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                        'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">GateKeeper UI Design System</h1>
+            <p class="text-gray-600">Complete component library and design tokens</p>
+        </div>
+
+        <!-- Color Palette -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="palette" class="w-6 h-6 text-primary-500"></i>
+                Color Palette
+            </h2>
+            
+            <!-- Primary Colors -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Primary Colors</h3>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-primary-500 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Primary</span>
+                        <span class="text-xs text-gray-400">#6366F1</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-primary-600 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Primary Dark</span>
+                        <span class="text-xs text-gray-400">#4F46E5</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-primary-400 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Primary Light</span>
+                        <span class="text-xs text-gray-400">#818CF8</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary Colors -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Secondary Colors</h3>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-secondary-500 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Secondary</span>
+                        <span class="text-xs text-gray-400">#10B981</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-secondary-600 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Secondary Dark</span>
+                        <span class="text-xs text-gray-400">#059669</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-secondary-400 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Secondary Light</span>
+                        <span class="text-xs text-gray-400">#34D399</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Colors -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Status Colors</h3>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-success shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Success</span>
+                        <span class="text-xs text-gray-400">#10B981</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-warning shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Warning</span>
+                        <span class="text-xs text-gray-400">#F59E0B</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-error shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Error</span>
+                        <span class="text-xs text-gray-400">#EF4444</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-info shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Info</span>
+                        <span class="text-xs text-gray-400">#3B82F6</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Neutral Colors -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Neutral Colors</h3>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-gray-900 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Text Primary</span>
+                        <span class="text-xs text-gray-400">#111827</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-gray-500 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Text Secondary</span>
+                        <span class="text-xs text-gray-400">#6B7280</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-gray-200 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Border</span>
+                        <span class="text-xs text-gray-400">#E5E7EB</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-white border border-gray-200 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Surface</span>
+                        <span class="text-xs text-gray-400">#FFFFFF</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-xl bg-gray-50 shadow-md"></div>
+                        <span class="text-sm mt-2 text-gray-600">Background</span>
+                        <span class="text-xs text-gray-400">#F9FAFB</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="type" class="w-6 h-6 text-primary-500"></i>
+                Typography
+            </h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Heading 1 - 36px</h1>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Heading 2 - 30px</h2>
+                <h3 class="text-2xl font-semibold text-gray-900 mb-4">Heading 3 - 24px</h3>
+                <h4 class="text-xl font-semibold text-gray-900 mb-4">Heading 4 - 20px</h4>
+                <h5 class="text-lg font-semibold text-gray-900 mb-4">Heading 5 - 18px</h5>
+                <p class="text-base text-gray-700 mb-4">Body Large - 16px - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="text-sm text-gray-600 mb-4">Body - 14px - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="text-xs text-gray-500 mb-4">Body Small - 12px - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="text-[11px] text-gray-400 font-medium">Caption - 11px - Lorem ipsum dolor sit amet.</p>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="mouse-pointer-2" class="w-6 h-6 text-primary-500"></i>
+                Buttons
+            </h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Primary Buttons</h3>
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button class="px-6 py-3 rounded-xl bg-primary-500 text-white font-semibold text-sm hover:bg-primary-600 transition shadow-md">
+                        Primary Button
+                    </button>
+                    <button class="px-6 py-3 rounded-xl bg-secondary-500 text-white font-semibold text-sm hover:bg-secondary-600 transition shadow-md">
+                        Secondary Button
+                    </button>
+                    <button class="px-6 py-3 rounded-xl bg-error text-white font-semibold text-sm hover:bg-red-600 transition shadow-md">
+                        Destructive
+                    </button>
+                </div>
+
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Secondary Buttons</h3>
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button class="px-6 py-3 rounded-xl border-2 border-primary-500 text-primary-500 font-semibold text-sm hover:bg-primary-50 transition">
+                        Outlined Primary
+                    </button>
+                    <button class="px-6 py-3 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold text-sm hover:border-gray-400 transition">
+                        Outlined Gray
+                    </button>
+                </div>
+
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Ghost Buttons</h3>
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button class="px-6 py-3 rounded-xl text-primary-500 font-semibold text-sm hover:bg-primary-50 transition">
+                        Ghost Primary
+                    </button>
+                    <button class="px-6 py-3 rounded-xl text-gray-600 font-semibold text-sm hover:bg-gray-100 transition">
+                        Ghost Gray
+                    </button>
+                </div>
+
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Button Sizes</h3>
+                <div class="flex flex-wrap items-center gap-4">
+                    <button class="px-4 py-2 rounded-lg bg-primary-500 text-white font-semibold text-xs hover:bg-primary-600 transition shadow-md">
+                        Small
+                    </button>
+                    <button class="px-6 py-3 rounded-xl bg-primary-500 text-white font-semibold text-sm hover:bg-primary-600 transition shadow-md">
+                        Medium
+                    </button>
+                    <button class="px-8 py-4 rounded-2xl bg-primary-500 text-white font-semibold text-base hover:bg-primary-600 transition shadow-md">
+                        Large
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Elements -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="input" class="w-6 h-6 text-primary-500"></i>
+                Form Elements
+            </h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Text Input</label>
+                        <input type="text" placeholder="Enter your name" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Email Input</label>
+                        <input type="email" placeholder="Enter your email" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Select Dropdown</label>
+                        <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none transition bg-white">
+                            <option>Select an option</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Textarea</label>
+                        <textarea rows="3" placeholder="Enter your message" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none transition resize-none"></textarea>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Checkbox</label>
+                    <div class="flex items-center gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                            <span class="text-sm text-gray-700">Option 1</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-primary-500 focus:ring-primary-500">
+                            <span class="text-sm text-gray-700">Option 2</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Radio Buttons</label>
+                    <div class="flex items-center gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="radio" class="w-5 h-5 border-gray-300 text-primary-500 focus:ring-primary-500">
+                            <span class="text-sm text-gray-700">Option 1</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="radio" class="w-5 h-5 border-gray-300 text-primary-500 focus:ring-primary-500">
+                            <span class="text-sm text-gray-700">Option 2</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">Toggle Switch</label>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+                        <span class="ml-3 text-sm font-medium text-gray-700">Enable notifications</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="layout" class="w-6 h-6 text-primary-500"></i>
+                Cards
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Event Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition duration-300">
+                    <div class="h-40 bg-gradient-to-br from-primary-500 to-primary-600"></div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-1 rounded-lg bg-primary-100 text-primary-600 text-xs font-semibold">Conference</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Tech Summit 2025</h3>
+                        <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                            <i data-lucide="calendar" class="w-4 h-4"></i>
+                            <span>Jan 20-22, 2025</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            <span>Jakarta Convention Center</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i data-lucide="users" class="w-4 h-4"></i>
+                                <span>245 attendees</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 rounded-lg hover:bg-gray-100 transition">
+                                    <i data-lucide="edit-2" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                                <button class="p-2 rounded-lg hover:bg-gray-100 transition">
+                                    <i data-lucide="trash-2" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-lg transition duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-success-surface flex items-center justify-center">
+                            <i data-lucide="check-circle" class="w-6 h-6 text-success"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-success">+12%</span>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-1">1,234</h3>
+                    <p class="text-sm text-gray-500">Total Check-ins</p>
+                </div>
+
+                <!-- Attendee Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-lg transition duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                            <span class="text-lg font-bold text-primary-600">JD</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900">John Doe</h3>
+                            <p class="text-sm text-gray-500">john@example.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-full bg-success-surface text-success text-xs font-semibold">Checked In</span>
+                        <button class="text-sm text-primary-600 font-semibold hover:text-primary-700 transition">View Ticket</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="badge" class="w-6 h-6 text-primary-500"></i>
+                Badges
+            </h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <span class="px-3 py-1 rounded-full bg-success-surface text-success text-xs font-semibold">Success</span>
+                    <span class="px-3 py-1 rounded-full bg-warning-surface text-warning text-xs font-semibold">Warning</span>
+                    <span class="px-3 py-1 rounded-full bg-error-surface text-error text-xs font-semibold">Error</span>
+                    <span class="px-3 py-1 rounded-full bg-info-surface text-info text-xs font-semibold">Info</span>
+                    <span class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">Default</span>
+                </div>
+
+                <div class="flex flex-wrap gap-4">
+                    <span class="px-3 py-1 rounded-full bg-primary-100 text-primary-600 text-xs font-semibold">Primary</span>
+                    <span class="px-3 py-1 rounded-full bg-secondary-100 text-secondary-600 text-xs font-semibold">Secondary</span>
+                    <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-semibold">Purple</span>
+                    <span class="px-3 py-1 rounded-full bg-pink-100 text-pink-600 text-xs font-semibold">Pink</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="alert-triangle" class="w-6 h-6 text-primary-500"></i>
+                Alerts
+            </h2>
+            
+            <div class="space-y-4">
+                <div class="flex items-start gap-4 p-4 rounded-xl bg-success-surface border border-success/20">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-success mt-0.5"></i>
+                    <div>
+                        <h4 class="text-sm font-bold text-success">Success</h4>
+                        <p class="text-sm text-success/80 mt-1">Your changes have been saved successfully.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-xl bg-warning-surface border border-warning/20">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-warning mt-0.5"></i>
+                    <div>
+                        <h4 class="text-sm font-bold text-warning">Warning</h4>
+                        <p class="text-sm text-warning/80 mt-1">Please review your information before proceeding.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-xl bg-error-surface border border-error/20">
+                    <i data-lucide="x-circle" class="w-5 h-5 text-error mt-0.5"></i>
+                    <div>
+                        <h4 class="text-sm font-bold text-error">Error</h4>
+                        <p class="text-sm text-error/80 mt-1">Something went wrong. Please try again.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-xl bg-info-surface border border-info/20">
+                    <i data-lucide="info" class="w-5 h-5 text-info mt-0.5"></i>
+                    <div>
+                        <h4 class="text-sm font-bold text-info">Info</h4>
+                        <p class="text-sm text-info/80 mt-1">This is an informational message.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tables -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="table" class="w-6 h-6 text-primary-500"></i>
+                Tables
+            </h2>
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Name</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Email</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                                        <span class="text-sm font-bold text-primary-600">JD</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">John Doe</div>
+                                        <div class="text-sm text-gray-500">Software Engineer</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">john@example.com</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 rounded-full bg-success-surface text-success text-xs font-semibold">Checked In</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-2">
+                                    <button class="p-2 rounded-lg hover:bg-gray-100 transition">
+                                        <i data-lucide="eye" class="w-4 h-4 text-gray-600"></i>
+                                    </button>
+                                    <button class="p-2 rounded-lg hover:bg-gray-100 transition">
+                                        <i data-lucide="edit-2" class="w-4 h-4 text-gray-600"></i>
+                                    </button>
+                                    <button class="p-2 rounded-lg hover:bg-gray-100 transition">
+                                        <i data-lucide="trash-2" class="w-4 h-4 text-gray-600"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-secondary-100 flex items-center justify-center">
+                                        <span class="text-sm font-bold text-secondary-600">JS</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">Jane Smith</div>
+                                        <div class="text-sm text-gray-500">Product Manager</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">jane@example.com</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">Registered</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex gap-2">
+                                    <button class="p-2 rounded-lg hover:bg-gray-100 transition">
+                                        <i data-lucide="eye" class="w-4 h-4 text-gray-600"></i>
+                                    </button>
+                                    <button class="p-2 rounded-lg hover:bg-gray-100 transition">
+                                        <i data-lucide="edit-2" class="w-4 h-4 text-gray-600"></i>
+                                    </button>
+                                    <button class="p-2 rounded-lg hover:bg-gray-100 transition">
+                                        <i data-lucide="trash-2" class="w-4 h-4 text-gray-600"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Icons -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="icons" class="w-6 h-6 text-primary-500"></i>
+                Icons
+            </h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+                <div class="grid grid-cols-4 md:grid-cols-8 gap-6">
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="home" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Home</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="calendar" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Calendar</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="users" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Users</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="qrcode" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">QR Code</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="scan" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Scan</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Check</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="x-circle" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">X Circle</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="settings" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Settings</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="bell" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Bell</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="search" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Search</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="plus" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Plus</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="edit-2" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Edit</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="trash-2" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Trash</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="download" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Download</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="upload" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Upload</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i data-lucide="log-out" class="w-6 h-6 text-primary-500"></i>
+                        <span class="text-xs text-gray-600">Logout</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QR Code Scanner Preview -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <i data-lucide="scan" class="w-6 h-6 text-primary-500"></i>
+                QR Code Scanner
+            </h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+                <div class="max-w-md mx-auto">
+                    <div class="relative bg-gray-900 rounded-2xl aspect-square flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-4 border-2 border-primary-500 rounded-xl"></div>
+                        <div class="absolute top-4 left-4 w-8 h-8 border-t-4 border-l-4 border-primary-500 rounded-tl-lg"></div>
+                        <div class="absolute top-4 right-4 w-8 h-8 border-t-4 border-r-4 border-primary-500 rounded-tr-lg"></div>
+                        <div class="absolute bottom-4 left-4 w-8 h-8 border-b-4 border-l-4 border-primary-500 rounded-bl-lg"></div>
+                        <div class="absolute bottom-4 right-4 w-8 h-8 border-b-4 border-r-4 border-primary-500 rounded-br-lg"></div>
+                        <div class="text-center text-white">
+                            <i data-lucide="camera" class="w-16 h-16 mx-auto mb-4 opacity-50"></i>
+                            <p class="text-sm opacity-75">Camera Preview</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex gap-3">
+                        <button class="flex-1 px-6 py-3 rounded-xl bg-primary-500 text-white font-semibold text-sm hover:bg-primary-600 transition shadow-md">
+                            <i data-lucide="scan" class="w-4 h-4 inline mr-2"></i>
+                            Scan QR Code
+                        </button>
+                        <button class="px-6 py-3 rounded-xl border border-gray-200 text-gray-700 font-semibold text-sm hover:bg-gray-50 transition">
+                            <i data-lucide="keyboard" class="w-4 h-4 inline mr-2"></i>
+                            Manual
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="text-center text-gray-500 text-sm mt-16">
+            <p>GateKeeper UI Design System v1.0</p>
+            <p class="mt-1">Built with TailwindCSS 3 & Lucide Icons</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+node_modules
+# Keep environment variables out of version control
+.env
+production.sqlite3
+dev.sqlite3
+data/*
+!data/.gitkeep
+storage/*
+!storage/.gitkeep
+
+# Testing
+coverage/
+.vitest/
+
+# Logs
+logs/
+*.log
+build
+dist
