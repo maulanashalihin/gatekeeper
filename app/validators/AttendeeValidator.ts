@@ -12,7 +12,7 @@ import { field } from './CommonValidator';
  */
 export const storeAttendeeSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(255, 'Name must be at most 255 characters'),
-  email: z.string().email('Invalid email address').max(255, 'Email must be at most 255 characters'),
+  email: z.string().email('Invalid email address').max(255, 'Email must be at most 255 characters').optional(),
   phone: z.string().max(50, 'Phone must be at most 50 characters').optional(),
   company: z.string().max(255, 'Company must be at most 255 characters').optional(),
   job_title: z.string().max(255, 'Job title must be at most 255 characters').optional(),

@@ -260,6 +260,7 @@ Route.put("/organizations/:org_uuid/events/:uuid/members/:member_uuid", [Auth], 
  * POST  /organizations/:org_uuid/events/:event_uuid/attendees                    - Store attendee
  * GET   /organizations/:org_uuid/events/:event_uuid/attendees/import             - Import attendees form
  * POST  /organizations/:org_uuid/events/:event_uuid/attendees/import             - Import attendees (CSV)
+ * GET   /organizations/:org_uuid/events/:event_uuid/attendees/print              - Print tickets page
  * GET   /organizations/:org_uuid/events/:event_uuid/attendees/:uuid              - Show attendee
  * GET   /organizations/:org_uuid/events/:event_uuid/attendees/:uuid/edit         - Edit attendee form
  * PUT   /organizations/:org_uuid/events/:event_uuid/attendees/:uuid              - Update attendee
@@ -272,6 +273,7 @@ Route.get("/organizations/:org_uuid/events/:event_uuid/attendees/create", [Auth]
 Route.post("/organizations/:org_uuid/events/:event_uuid/attendees", [Auth], AttendeeController.store);
 Route.get("/organizations/:org_uuid/events/:event_uuid/attendees/import", [Auth], AttendeeController.import);
 Route.post("/organizations/:org_uuid/events/:event_uuid/attendees/import", [Auth], AttendeeController.processImport);
+Route.get("/organizations/:org_uuid/events/:event_uuid/attendees/print", [Auth], AttendeeController.print);
 Route.get("/organizations/:org_uuid/events/:event_uuid/attendees/:uuid", [Auth], AttendeeController.show);
 Route.get("/organizations/:org_uuid/events/:event_uuid/attendees/:uuid/edit", [Auth], AttendeeController.edit);
 Route.put("/organizations/:org_uuid/events/:event_uuid/attendees/:uuid", [Auth], AttendeeController.update);

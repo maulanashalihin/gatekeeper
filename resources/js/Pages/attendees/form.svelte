@@ -17,10 +17,16 @@
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
+    const cleanedData = {
+      name: formData.name || undefined,
+      email: formData.email || undefined,
+      phone: formData.phone || undefined,
+      notes: formData.notes || undefined
+    };
     if (isEdit) {
-      router.put(`/organizations/${orgUuid}/events/${event.id}/attendees/${attendee.id}`, formData);
+      router.put(`/organizations/${orgUuid}/events/${event.id}/attendees/${attendee.id}`, cleanedData);
     } else {
-      router.post(`/organizations/${orgUuid}/events/${event.id}/attendees`, formData);
+      router.post(`/organizations/${orgUuid}/events/${event.id}/attendees`, cleanedData);
     }
   };
 </script>
@@ -71,7 +77,7 @@
                 </div>
               </div>
               <div class="md:col-span-2">
-                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Email Address *</label>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
                 <div class="relative">
                   <Mail class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
@@ -79,7 +85,6 @@
                     bind:value={formData.email}
                     class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900/50 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary-500"
                     placeholder="Enter email address"
-                    required
                   />
                 </div>
               </div>

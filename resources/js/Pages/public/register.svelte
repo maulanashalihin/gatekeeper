@@ -63,13 +63,12 @@
 
           <!-- Email -->
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-2">Email Address *</label>
+            <label class="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
             <input 
               type="email" 
               bind:value={formData.email} 
               class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:outline-none" 
               placeholder="Enter your email address" 
-              required 
             />
           </div>
 

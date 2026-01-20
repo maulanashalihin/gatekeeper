@@ -103,6 +103,10 @@
           <Upload class="w-4 h-4" />
           Import
         </a>
+        <a href={`/organizations/${orgUuid}/events/${event.id}/attendees/print`} use:inertia class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 font-semibold text-sm hover:bg-gray-50 dark:hover:bg-slate-700 transition min-h-[44px]">
+          <Ticket class="w-4 h-4" />
+          Print Tickets
+        </a>
         <a href={`/organizations/${orgUuid}/events/${event.id}/attendees/create`} use:inertia class="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl bg-primary-500 text-white font-semibold text-sm hover:bg-primary-600 transition shadow-md min-h-[44px]">
           <Plus class="w-4 h-4" />
           Add Attendee
@@ -201,10 +205,8 @@
                 <StatusBadge status={attendee.status} />
               </div>
               <div class="mb-3">
-                <p class="text-sm text-gray-900 dark:text-white">{attendee.company || '-'}</p>
-                {#if attendee.job_title}
-                  <p class="text-xs text-gray-600 dark:text-gray-400">{attendee.job_title}</p>
-                {/if}
+                <p class="text-sm text-gray-900 dark:text-white capitalize">by {attendee.registration_method?.replace('_', ' ') || '-'}</p>
+                <p class="text-xs text-gray-600 dark:text-gray-400">{attendee.creator_name || 'Unknown'}</p>
               </div>
               <div class="flex items-center justify-between">
                 <p class="text-xs text-gray-500 dark:text-gray-500">
@@ -231,7 +233,7 @@
             <thead class="bg-gray-50 dark:bg-slate-900/50 border-b border-gray-200 dark:border-slate-700">
               <tr>
                 <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Attendee</th>
-                <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Company</th>
+                <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Registration</th>
                 <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Status</th>
                 <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Registered</th>
                 <th class="text-right px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Actions</th>
@@ -251,10 +253,8 @@
                   </td>
                   <td class="px-6 py-4">
                     <div>
-                      <p class="text-sm text-gray-900 dark:text-white">{attendee.company || '-'}</p>
-                      {#if attendee.job_title}
-                        <p class="text-xs text-gray-600 dark:text-gray-400">{attendee.job_title}</p>
-                      {/if}
+                      <p class="text-sm text-gray-900 dark:text-white capitalize">By {attendee.registration_method?.replace('_', ' ') || '-'}</p>
+                      <p class="text-xs text-gray-600 dark:text-gray-400">{attendee.creator_name || 'Unknown'}</p>
                     </div>
                   </td>
                   <td class="px-6 py-4">

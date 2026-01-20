@@ -3,6 +3,7 @@ import DB from '../services/DB';
 import Validator from '../services/Validator';
 import { storeAttendeeSchema, updateAttendeeSchema, importAttendeesSchema } from '../validators/AttendeeValidator';
 import { v4 as uuidv4 } from 'uuid';
+import { uuidv7 } from 'uuidv7';
 import crypto from 'crypto';
 
 // Helper functions
@@ -36,7 +37,7 @@ function parseCSV(content: string): any[] {
       else if (header === 'job_title') attendee.job_title = values[index];
     });
 
-    if (attendee.name && attendee.email) {
+    if (attendee.name) {
       attendees.push(attendee);
     }
   }
@@ -55,9 +56,13 @@ class AttendeeController {
     }
 
     const attendees = await DB.from('attendees')
-      .where('event_id', eventUuid)
-      .orderBy('created_at', 'desc')
-      .select('*');
+      .leftJoin('users', 'attendees.created_by', 'users.id')
+      .where('attendees.event_id', eventUuid)
+      .orderBy('attendees.created_at', 'desc')
+      .select(
+        'attendees.*',
+        'users.name as creator_name'
+      );
 
     const event = await DB.from('events')
       .where('id', eventUuid)
@@ -125,7 +130,7 @@ class AttendeeController {
     console.log('[AttendeeController.store] Validated data:', data);
 
     try {
-      const attendeeId = uuidv4();
+      const attendeeId = uuidv7();
       const qrCode = generateQRCode(attendeeId, eventUuid);
       console.log('[AttendeeController.store] Generated QR code:', qrCode);
 
@@ -450,6 +455,37 @@ class AttendeeController {
     }
 
     return response.flash('success', 'Email sent successfully').redirect(`/organizations/${orgUuid}/events/${eventUuid}/attendees`, 303);
+  }
+
+  async print(request: Request, response: Response) {
+    const user = request.user;
+    const orgUuid = request.params.org_uuid;
+    const eventUuid = request.params.event_uuid;
+
+    if (!user) {
+      return response.redirect('/login', 302);
+    }
+
+    const attendees = await DB.from('attendees')
+      .where('event_id', eventUuid)
+      .where('status', '!=', 'cancelled')
+      .orderBy('created_at', 'asc')
+      .select('*');
+
+    const event = await DB.from('events')
+      .where('id', eventUuid)
+      .where('organization_id', orgUuid)
+      .first();
+
+    if (!event) {
+      return response.flash('error', 'Event not found').redirect(`/organizations/${orgUuid}/events`, 302);
+    }
+
+    return response.inertia('attendees/print', {
+      attendees,
+      event,
+      orgUuid
+    });
   }
 }
 

@@ -8,7 +8,10 @@ const config: { [key: string]: Knex.Config } = {
     connection: {
       filename: "./data/dev.sqlite3"
     },
-    useNullAsDefault : true
+    useNullAsDefault : true,
+    seeds: {
+      directory: './seeders'
+    }
   },
 
   production: {
@@ -16,7 +19,10 @@ const config: { [key: string]: Knex.Config } = {
     connection: {
       filename: "./data/production.sqlite3"
     },
-    useNullAsDefault : true
+    useNullAsDefault : true,
+    seeds: {
+      directory: './seeders'
+    }
   },
 
   test: {
@@ -27,6 +33,9 @@ const config: { [key: string]: Knex.Config } = {
     useNullAsDefault : true,
     migrations: {
       directory: './migrations'
+    },
+    seeds: {
+      directory: './seeders'
     }
   }
 
