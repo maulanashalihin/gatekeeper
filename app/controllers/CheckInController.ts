@@ -196,24 +196,40 @@ class CheckInController {
     }
 
     console.log('[CheckInController] Inserting check-in record');
-    await DB.table('check_ins').insert({
-      attendee_id: attendeeId,
-      event_id: eventUuid,
-      method: 'qr',
-      checked_in_at: Date.now(),
-      checked_in_by: user.id,
-      created_at: Date.now()
-    });
-
-    console.log('[CheckInController] Updating attendee status');
-    await DB.from('attendees')
-      .where('id', attendeeId)
-      .update({
-        status: 'checked_in',
+    try {
+      await DB.table('check_ins').insert({
+        attendee_id: attendeeId,
+        event_id: eventUuid,
+        method: 'qr',
         checked_in_at: Date.now(),
         checked_in_by: user.id,
-        updated_at: Date.now()
+        created_at: Date.now()
       });
+    } catch (error: any) {
+      console.error('[CheckInController] Error inserting check-in:', error);
+      return response.status(500).json({
+        success: false,
+        message: 'Failed to record check-in: ' + (error.message || 'Unknown error')
+      });
+    }
+
+    console.log('[CheckInController] Updating attendee status');
+    try {
+      await DB.from('attendees')
+        .where('id', attendeeId)
+        .update({
+          status: 'checked_in',
+          checked_in_at: Date.now(),
+          checked_in_by: user.id,
+          updated_at: Date.now()
+        });
+    } catch (error: any) {
+      console.error('[CheckInController] Error updating attendee:', error);
+      return response.status(500).json({
+        success: false,
+        message: 'Failed to update attendee status: ' + (error.message || 'Unknown error')
+      });
+    }
 
     console.log('[CheckInController] Check-in successful');
     return response.json({
