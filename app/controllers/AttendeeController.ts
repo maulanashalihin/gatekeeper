@@ -8,14 +8,7 @@ import crypto from 'crypto';
 
 // Helper functions
 function generateQRCode(attendeeId: string, eventId: string): string {
-  const timestamp = Date.now();
-  const signature = crypto
-    .createHmac('sha256', process.env.QR_CODE_SECRET || 'default-secret')
-    .update(`${attendeeId}:${eventId}:${timestamp}`)
-    .digest('hex')
-    .substring(0, 16);
-
-  return `${attendeeId}|${eventId}|${signature}`;
+  return attendeeId;
 }
 
 function parseCSV(content: string): any[] {

@@ -148,29 +148,10 @@ class CheckInController {
     const user = request.user;
     const orgUuid = request.params.org_uuid;
     const eventUuid = request.params.event_uuid;
-    const qrCode = request.params.attendee_uuid;
+    const attendeeId = request.params.attendee_uuid;
 
     if (!user) {
       return response.redirect('/login', 302);
-    }
-
-    // Parse QR code: ${attendeeId}|${eventId}|${signature}
-    const parts = qrCode.split('|');
-    if (parts.length !== 3) {
-      return response.status(400).json({
-        success: false,
-        message: 'Invalid QR code format'
-      });
-    }
-
-    const [attendeeId, qrEventId, signature] = parts;
-
-    // Validate QR code event matches current event
-    if (qrEventId !== eventUuid) {
-      return response.status(400).json({
-        success: false,
-        message: 'QR code is not for this event'
-      });
     }
 
     const attendee = await DB.from('attendees')
