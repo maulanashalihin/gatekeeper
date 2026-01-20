@@ -148,14 +148,33 @@ class CheckInController {
     const user = request.user;
     const orgUuid = request.params.org_uuid;
     const eventUuid = request.params.event_uuid;
-    const attendeeUuid = request.params.attendee_uuid;
+    const qrCode = request.params.attendee_uuid;
 
     if (!user) {
       return response.redirect('/login', 302);
     }
 
+    // Parse QR code: ${attendeeId}-${eventId}-${signature}
+    const parts = qrCode.split('-');
+    if (parts.length !== 3) {
+      return response.status(400).json({
+        success: false,
+        message: 'Invalid QR code format'
+      });
+    }
+
+    const [attendeeId, qrEventId, signature] = parts;
+
+    // Validate QR code event matches current event
+    if (qrEventId !== eventUuid) {
+      return response.status(400).json({
+        success: false,
+        message: 'QR code is not for this event'
+      });
+    }
+
     const attendee = await DB.from('attendees')
-      .where('id', attendeeUuid)
+      .where('id', attendeeId)
       .where('event_id', eventUuid)
       .first();
 
@@ -177,7 +196,7 @@ class CheckInController {
 
     if (eventSettings && !eventSettings.allow_duplicate_checkin) {
       const existingCheckIn = await DB.from('check_ins')
-        .where('attendee_id', attendeeUuid)
+        .where('attendee_id', attendeeId)
         .first();
 
       if (existingCheckIn) {
@@ -190,7 +209,7 @@ class CheckInController {
     }
 
     await DB.table('check_ins').insert({
-      attendee_id: attendeeUuid,
+      attendee_id: attendeeId,
       event_id: eventUuid,
       method: 'qr',
       checked_in_at: Date.now(),
@@ -199,7 +218,7 @@ class CheckInController {
     });
 
     await DB.from('attendees')
-      .where('id', attendeeUuid)
+      .where('id', attendeeId)
       .update({
         status: 'checked_in',
         checked_in_at: Date.now(),

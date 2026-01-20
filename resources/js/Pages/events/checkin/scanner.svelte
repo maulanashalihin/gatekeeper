@@ -91,29 +91,7 @@
     scanResult = null;
 
     try {
-      const attendee = await fetch(`/api/attendees/${qrCode}/info`)
-        .then(res => res.json())
-        .catch(() => null);
-
-      if (!attendee) {
-        scanResult = {
-          success: false,
-          message: 'Attendee not found'
-        };
-        isLoading = false;
-        return;
-      }
-
-      if (attendee.event_id !== event.id) {
-        scanResult = {
-          success: false,
-          message: 'Attendee not registered for this event'
-        };
-        isLoading = false;
-        return;
-      }
-
-      const response = await fetch(`/organizations/${orgUuid}/events/${event.id}/checkin/${attendee.id}`, {
+      const response = await fetch(`/organizations/${orgUuid}/events/${event.id}/checkin/${qrCode}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
