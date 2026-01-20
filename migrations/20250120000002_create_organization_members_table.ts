@@ -10,10 +10,11 @@ export async function up(knex: Knex): Promise<void> {
         table.timestamp('added_at').notNullable()
         table.bigInteger('created_at')
         table.bigInteger('updated_at')
-        
+
         table.unique(['organization_id', 'user_id'])
         table.index('organization_id')
         table.index('user_id')
+        table.index('created_at')
     })
 }
 

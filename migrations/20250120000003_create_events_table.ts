@@ -35,11 +35,12 @@ export async function up(knex: Knex): Promise<void> {
         table.uuid('created_by').references('id').inTable('users')
         table.bigInteger('created_at')
         table.bigInteger('updated_at')
-        
+
         table.index('organization_id')
         table.index('slug')
         table.index('status')
         table.index('start_date')
+        table.index('created_at')
     })
 }
 

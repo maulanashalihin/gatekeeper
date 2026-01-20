@@ -12,6 +12,8 @@ export async function up(knex: Knex): Promise<void> {
         table.integer('onboarding_step').defaultTo(1)
         table.bigInteger('created_at')
         table.bigInteger('updated_at')
+   table.uuid('created_by').nullable().references('id').inTable('users').onDelete('SET NULL');
+        table.index('created_at')
     })
 }
 

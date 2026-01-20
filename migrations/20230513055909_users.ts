@@ -13,14 +13,15 @@ export async function up(knex: Knex): Promise<void> {
         table.boolean("is_admin").defaultTo(false);
         table.string('password', 180).notNullable()
         table.string('remember_me_token').nullable()
-   
+
         /**
          * Uses timestampz for PostgreSQL and DATETIME2 for MSSQL
          */
         table.bigInteger("created_at")
         table.bigInteger("updated_at")
-      
-    }) 
+
+        table.index('created_at')
+    })
 }
 
 
