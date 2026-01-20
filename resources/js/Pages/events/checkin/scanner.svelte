@@ -4,6 +4,7 @@
   import { ArrowLeft, QrCode, Camera, CheckCircle, XCircle, Loader2 } from 'lucide-svelte';
   import QrScanner from 'qr-scanner';
   import { onMount, onDestroy } from 'svelte';
+  import { Toast } from '../../../Components/helper.js';
 
   let { event, orgUuid } = $props();
 
@@ -108,12 +109,16 @@
       scanResult = data;
 
       if (data.success) {
+        Toast(data.message, 'success');
         setTimeout(() => {
           scanResult = null;
         }, 3000);
+      } else {
+        Toast(data.message, 'error');
       }
     } catch (error) {
       console.error('[Scanner] Error:', error);
+      Toast('Failed to scan QR code', 'error');
       scanResult = {
         success: false,
         message: 'Failed to scan QR code'
