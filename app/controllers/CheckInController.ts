@@ -2,6 +2,7 @@ import { Request, Response } from "../../type";
 import DB from '../services/DB';
 import Validator from '../services/Validator';
 import { scanCheckInSchema, manualCheckInSchema, undoCheckInSchema } from '../validators/CheckInValidator';
+import { uuidv7 } from 'uuidv7';
 
 class CheckInController {
   async scan(request: Request, response: Response) {
@@ -196,8 +197,10 @@ class CheckInController {
     }
 
     console.log('[CheckInController] Inserting check-in record');
+    const checkInId = uuidv7();
     try {
       await DB.table('check_ins').insert({
+        id: checkInId,
         attendee_id: attendeeId,
         event_id: eventUuid,
         method: 'qr',
