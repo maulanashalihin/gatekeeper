@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<void> {
         
         // Attendee information
         table.string('name', 255).notNullable()
-        table.string('email', 255).notNullable()
+        table.string('email', 255).nullable()
         table.string('phone', 50).nullable()
         table.string('company', 255).nullable()
         table.string('job_title', 255).nullable()
