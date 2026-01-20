@@ -153,7 +153,7 @@
             <div class="relative">
               <div class="w-64 h-64 bg-white dark:bg-slate-700 rounded-2xl shadow-lg border-2 border-gray-200 dark:border-slate-600 flex items-center justify-center p-4">
                 <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(attendee.qr_code)}`}
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(attendee.id)}`}
                   alt="QR Code"
                   class="w-full h-full"
                 />

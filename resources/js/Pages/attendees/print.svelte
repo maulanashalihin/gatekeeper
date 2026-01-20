@@ -332,7 +332,7 @@
                     <div class="relative w-28 h-28 flex-shrink-0">
                       <div class="w-full h-full bg-white dark:bg-slate-700 rounded-lg border border-gray-200 dark:border-slate-600 flex items-center justify-center p-1">
                         <img 
-                          src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(attendee.qr_code)}`}
+                          src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(attendee.id)}`}
                           alt="QR Code"
                           class="w-full h-full"
                         />

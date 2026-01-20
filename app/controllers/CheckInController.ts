@@ -145,8 +145,7 @@ class CheckInController {
   }
 
   async checkin(request: Request, response: Response) {
-    const user = request.user;
-    const orgUuid = request.params.org_uuid;
+    const user = request.user; 
     const eventUuid = request.params.event_uuid;
     const attendeeId = request.params.attendee_uuid;
 
