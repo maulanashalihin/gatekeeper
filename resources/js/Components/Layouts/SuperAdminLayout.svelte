@@ -3,7 +3,7 @@
   import { Home, Users, BarChart3, Settings, LogOut, User, Bell, ChevronRight, Menu, X } from 'lucide-svelte';
   import DarkModeToggle from '../DarkModeToggle.svelte';
   
-  let sidebarOpen = $state(true);
+  let sidebarOpen = $state(false);
   let { group } = $props();
   
   const navigation = [
@@ -17,16 +17,16 @@
 
 <div class="min-h-screen bg-slate-50 dark:bg-slate-950">
   <!-- Mobile Sidebar Overlay -->
-  {#if !sidebarOpen}
+  {#if sidebarOpen}
     <div 
       class="fixed inset-0 z-40 bg-black/50 lg:hidden"
-      on:click={() => sidebarOpen = true}
+      on:click={() => sidebarOpen = false}
     ></div>
   {/if}
   
   <!-- Sidebar -->
   <aside 
-    class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-transform duration-300 lg:translate-x-0 {sidebarOpen ? '-translate-x-full' : 'translate-x-0'}"
+    class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-transform duration-300 lg:translate-x-0 {sidebarOpen ? 'translate-x-0' : '-translate-x-full'}"
   >
     <!-- Logo -->
     <div class="flex items-center justify-between h-16 px-6 border-b border-slate-200 dark:border-slate-800">
@@ -38,7 +38,7 @@
       </div>
       <button 
         class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-        on:click={() => sidebarOpen = true}
+        on:click={() => sidebarOpen = false}
       >
         <X class="w-5 h-5" />
       </button>
@@ -88,7 +88,7 @@
         <div class="flex items-center gap-4">
           <button 
             class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-            on:click={() => sidebarOpen = false}
+            on:click={() => sidebarOpen = true}
           >
             <Menu class="w-5 h-5" />
           </button>

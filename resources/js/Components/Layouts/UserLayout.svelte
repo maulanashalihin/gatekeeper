@@ -3,7 +3,7 @@
   import { Home, User, Building2, LogOut, Bell, ChevronRight, Menu, X, ChevronDown } from 'lucide-svelte';
   import DarkModeToggle from '../DarkModeToggle.svelte';
   
-  let sidebarOpen = $state(true);
+  let sidebarOpen = $state(false);
   let profileDropdownOpen = $state(false);
   let { group, children } = $props();
   
@@ -16,10 +16,10 @@
 
 <div class="min-h-screen bg-slate-50 dark:bg-slate-950">
   <!-- Mobile Sidebar Overlay -->
-  {#if !sidebarOpen}
+  {#if sidebarOpen}
     <div 
       class="fixed inset-0 z-40 bg-black/50 lg:hidden"
-      onclick={() => sidebarOpen = true}
+      onclick={() => sidebarOpen = false}
     ></div>
   {/if}
   
@@ -89,7 +89,7 @@
         <div class="flex items-center gap-4">
           <button 
             class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-            onclick={() => sidebarOpen = false}
+            onclick={() => sidebarOpen = true}
           >
             <Menu class="w-5 h-5" />
           </button>
