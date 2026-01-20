@@ -15,7 +15,7 @@ function generateQRCode(attendeeId: string, eventId: string): string {
     .digest('hex')
     .substring(0, 16);
 
-  return `${attendeeId}-${eventId}-${signature}`;
+  return `${attendeeId}|${eventId}|${signature}`;
 }
 
 function parseCSV(content: string): any[] {

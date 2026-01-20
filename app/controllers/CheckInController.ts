@@ -154,8 +154,8 @@ class CheckInController {
       return response.redirect('/login', 302);
     }
 
-    // Parse QR code: ${attendeeId}-${eventId}-${signature}
-    const parts = qrCode.split('-');
+    // Parse QR code: ${attendeeId}|${eventId}|${signature}
+    const parts = qrCode.split('|');
     if (parts.length !== 3) {
       return response.status(400).json({
         success: false,
