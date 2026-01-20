@@ -57,6 +57,10 @@ class ProfileController {
          .orderBy("organizations.created_at", "desc")
          .limit(3);
 
+      if(organizations.length === 0) {
+         return response.redirect("/onboarding");
+      }
+
       return response.inertia("home", { user, organizations });
    }
 
