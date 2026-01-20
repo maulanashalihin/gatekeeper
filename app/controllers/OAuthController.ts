@@ -58,7 +58,7 @@ class OAuthController {
 
          await DB.table("users").insert(user);
 
-         return Authenticate.process(user, request, response, "/onboarding");
+         return Authenticate.process(user, request, response);
       }
    }
 }

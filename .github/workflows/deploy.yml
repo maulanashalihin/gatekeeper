@@ -94,7 +94,7 @@ jobs:
           echo "🚀 Starting deployment..."
           
           # [SESUAIKAN] Ganti dengan path ke direktori proyek Anda
-          cd /root/laju
+          cd /root/gatekeeper
           
           echo "📥 Pulling code from GitHub..."
           git pull origin main
@@ -121,6 +121,6 @@ jobs:
         
           # [SESUAIKAN] Ganti 'laju' dengan nama PM2 process Anda
           echo "🔄 Reloading PM2 process..."
-          pm2 reload laju
+          pm2 reload gatekeeper
           
           echo "✅ Deployment finished!"
