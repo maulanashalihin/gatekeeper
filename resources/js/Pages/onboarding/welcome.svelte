@@ -30,10 +30,12 @@
         <DarkModeToggle />
       </div>
       <div class="text-center mb-12">
-        <div class="inline-flex items-center justify-center w-20 h-20 p-3 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 mb-6 shadow-lg shadow-blue-500/30">
+        <div class="flex w-full justify-center mb-4">
+           <div class="w-16 h-16">
            
-         <img src="/public/icon-gk.webp" alt="" class="invert brightness-0 contrast-100">
-         
+          <img src="/public/icon-gk.webp" alt="" class="dark:invert dark:brightness-0 dark:contrast-100">
+     
+        </div>
         </div>
         <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
           Welcome to GateKeeper!

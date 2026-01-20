@@ -92,7 +92,7 @@
         </button>
 
         <a
-          href="/"
+          href="/home"
           use:inertia
           class="px-8 py-4 rounded-xl border border-gray-300 dark:border-slate-600 bg-gray-100 dark:bg-slate-700/50 text-gray-900 dark:text-white font-semibold hover:bg-gray-200 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-gray-500/50 dark:focus:ring-slate-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-800 transition-all duration-200 flex items-center justify-center gap-2 text-center"
         >

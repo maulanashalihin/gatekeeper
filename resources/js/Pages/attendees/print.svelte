@@ -2,6 +2,7 @@
   import { router, inertia } from '@inertiajs/svelte';
   import EventLayout from '../../Components/Layouts/EventLayout.svelte';
   import { ArrowLeft, Printer, Check, X, Calendar, Clock, User, Mail, Phone, Building, MapPin, CheckCircle, XCircle, Ticket as TicketIcon, Globe } from 'lucide-svelte';
+  import dayjs from 'dayjs';
 
   let { attendees, event, orgUuid } = $props();
 
@@ -49,20 +50,12 @@
     return texts[status] || status;
   };
 
-  const formatDate = (date: string | Date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    });
+  const formatDate = (timestamp: number | string) => {
+    return dayjs(timestamp).format('dddd, MMMM D, YYYY');
   };
 
-  const formatTime = (date: string | Date) => {
-    return new Date(date).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  const formatTime = (timestamp: number | string) => {
+    return dayjs(timestamp).format('HH:mm');
   };
 </script>
 

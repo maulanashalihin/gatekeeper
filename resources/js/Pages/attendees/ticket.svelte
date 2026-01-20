@@ -3,6 +3,7 @@
   import EventLayout from '../../Components/Layouts/EventLayout.svelte';
   import { ArrowLeft, Download, Printer, Calendar, MapPin, Clock, User, Mail, CheckCircle, XCircle, Ticket as TicketIcon, Share2, Copy, Phone, Building, MessageCircle, ExternalLink, Globe } from 'lucide-svelte';
   import { Toast } from '../../Components/helper.js';
+  import dayjs from 'dayjs';
 
   let { attendee, event, orgUuid, flash } = $props();
 
@@ -26,20 +27,12 @@
     return texts[status] || status;
   };
 
-  const formatDate = (date: string | Date) => {
-    return new Date(date).toLocaleDateString('en-US', {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    });
+  const formatDate = (timestamp: number | string) => {
+    return dayjs(timestamp).format('dddd, MMMM D, YYYY');
   };
 
-  const formatTime = (date: string | Date) => {
-    return new Date(date).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  const formatTime = (timestamp: number | string) => {
+    return dayjs(timestamp).format('HH:mm');
   };
 
   const printTicket = () => {

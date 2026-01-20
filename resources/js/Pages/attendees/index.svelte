@@ -6,7 +6,7 @@
   import StatusBadge from '../../Components/StatusBadge.svelte';
   import Alert from '../../Components/Alert.svelte';
 
-  let { attendees, event, orgUuid, flash } = $props();
+  let { attendees, event, orgUuid, flash, eventSettings } = $props();
 
   let searchQuery = $state('');
   let statusFilter = $state('all');
@@ -22,6 +22,8 @@
   const registeredCount = $derived(attendees.filter((a: any) => a.status === 'registered').length);
   const checkedInCount = $derived(attendees.filter((a: any) => a.status === 'checked_in').length);
   const cancelledCount = $derived(attendees.filter((a: any) => a.status === 'cancelled').length);
+  const maleCount = $derived(attendees.filter((a: any) => a.gender === 'male').length);
+  const femaleCount = $derived(attendees.filter((a: any) => a.gender === 'female').length);
 
   const deleteAttendee = (id: string) => {
     if (confirm('Are you sure you want to delete this attendee?')) {
@@ -40,12 +42,13 @@
   };
 
   const downloadAttendees = () => {
-    const headers = ['id', 'name', 'phone', 'email', 'link public'];
+    const headers = ['id', 'name', 'phone', 'email', ...(eventSettings?.enable_gender ? ['gender'] : []), 'link public'];
     const rows = attendees.map((a: any) => [
       a.id,
       a.name,
       a.phone || '',
       a.email,
+      ...(eventSettings?.enable_gender ? [a.gender || ''] : []),
       `${window.location.origin}/events/${event.slug}/ticket/${a.id}`
     ]);
 
@@ -150,6 +153,26 @@
       />
     </div>
 
+    {#if eventSettings?.enable_gender}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <StatsCard
+          title="Laki-laki"
+          value={maleCount}
+          icon={Users}
+          iconColorClass="text-indigo-600 dark:text-indigo-400"
+          iconBgClass="bg-indigo-100 dark:bg-indigo-900/30"
+        />
+
+        <StatsCard
+          title="Perempuan"
+          value={femaleCount}
+          icon={Users}
+          iconColorClass="text-pink-600 dark:text-pink-400"
+          iconBgClass="bg-pink-100 dark:bg-pink-900/30"
+        />
+      </div>
+    {/if}
+
     <!-- Filters -->
     <div class="flex flex-col sm:flex-row gap-3">
       <div class="flex-1 relative">
@@ -201,6 +224,9 @@
                   {#if attendee.phone}
                     <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">{attendee.phone}</p>
                   {/if}
+                  {#if eventSettings?.enable_gender && attendee.gender}
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1 capitalize">{attendee.gender === 'male' ? 'Laki-laki' : 'Perempuan'}</p>
+                  {/if}
                 </div>
                 <StatusBadge status={attendee.status} />
               </div>
@@ -233,6 +259,9 @@
             <thead class="bg-gray-50 dark:bg-slate-900/50 border-b border-gray-200 dark:border-slate-700">
               <tr>
                 <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Attendee</th>
+                {#if eventSettings?.enable_gender}
+                  <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Jenis Kelamin</th>
+                {/if}
                 <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Registration</th>
                 <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Status</th>
                 <th class="text-left px-6 py-4 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Registered</th>
@@ -251,6 +280,13 @@
                       {/if}
                     </div>
                   </td>
+                  {#if eventSettings?.enable_gender}
+                    <td class="px-6 py-4">
+                      <p class="text-sm text-gray-600 dark:text-gray-400 capitalize">
+                        {attendee.gender === 'male' ? 'Laki-laki' : attendee.gender === 'female' ? 'Perempuan' : '-'}
+                      </p>
+                    </td>
+                  {/if}
                   <td class="px-6 py-4">
                     <div>
                       <p class="text-sm text-gray-900 dark:text-white capitalize">By {attendee.registration_method?.replace('_', ' ') || '-'}</p>

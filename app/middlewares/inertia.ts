@@ -52,7 +52,7 @@ const inertia = () => {
             props: props,
             url: url,
             version: pkg.version,
-         };
+         }; 
 
          if (!request.header("X-Inertia")) {
             const html = view("inertia.html", {

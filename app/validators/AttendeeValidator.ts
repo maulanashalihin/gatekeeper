@@ -16,6 +16,7 @@ export const storeAttendeeSchema = z.object({
   phone: z.string().max(50, 'Phone must be at most 50 characters').optional(),
   company: z.string().max(255, 'Company must be at most 255 characters').optional(),
   job_title: z.string().max(255, 'Job title must be at most 255 characters').optional(),
+  gender: z.enum(['male', 'female']).optional(),
   custom_data: z.string().optional(),
   notes: z.string().optional(),
 });
@@ -30,6 +31,7 @@ export const updateAttendeeSchema = z.object({
   phone: z.string().max(50, 'Phone must be at most 50 characters').optional(),
   company: z.string().max(255, 'Company must be at most 255 characters').optional(),
   job_title: z.string().max(255, 'Job title must be at most 255 characters').optional(),
+  gender: z.enum(['male', 'female']).optional(),
   custom_data: z.string().optional(),
   notes: z.string().optional(),
   status: z.enum(['registered', 'checked_in', 'cancelled', 'no_show']).optional(),

@@ -71,7 +71,7 @@ export function view(filename: string, view_data?: Record<string, unknown>) {
    view_data = view_data || {}; 
    view_data.t = t
    view_data.base_url = process.env.APP_URL; 
-   view_data.current_year = new Date().getFullYear(); 
+   view_data.current_year = new Date().getFullYear();  
    view_data.asset = function(file: string){
       if(process.env.NODE_ENV === 'production')
       {

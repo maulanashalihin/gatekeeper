@@ -15,11 +15,11 @@
 
   const getEventStatusColor = (status: string) => {
     const colors: Record<string, string> = {
-      draft: 'bg-gray-100 text-gray-600',
-      published: 'bg-blue-100 text-green-500/800',
-      ongoing: 'bg-green-100 text-amber-500/800',
-      completed: 'bg-purple-100 text-purple-600',
-      cancelled: 'bg-red-100 text-red-600'
+      draft: 'bg-gray-100 dark:bg-gray-600 text-gray-600',
+      published: 'bg-blue-100 dark:bg-blue-600 text-green-500/800',
+      ongoing: 'bg-green-100 dark:bg-green-600 text-amber-500/800',
+      completed: 'bg-purple-100 dark:bg-purple-600 text-purple-600',
+      cancelled: 'bg-red-100 dark:bg-red-600 text-red-600'
     };
     return colors[status] || 'bg-gray-100 text-gray-600';
   };

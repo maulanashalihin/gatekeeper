@@ -4,18 +4,24 @@
   import Alert from '../../Components/Alert.svelte';
   import Autocomplete from '../../Components/Autocomplete.svelte';
   import { ArrowLeft, Save, X } from 'lucide-svelte';
+  import dayjs from 'dayjs';
 
   let { event, orgUuid, flash } = $props();
 
   const isEdit = !!event;
+
+  const formatToLocalDateTime = (timestamp: number | null | undefined) => {
+    if (!timestamp) return '';
+    return dayjs(timestamp).format('YYYY-MM-DDTHH:mm');
+  };
 
   const formData = $state({
     name: event?.name || '',
     slug: event?.slug || '',
     description: event?.description || '',
     type: event?.type || 'conference',
-    start_date: event?.start_date ? new Date(event.start_date).toISOString().slice(0, 16) : '',
-    end_date: event?.end_date ? new Date(event.end_date).toISOString().slice(0, 16) : '',
+    start_date: formatToLocalDateTime(event?.start_date),
+    end_date: formatToLocalDateTime(event?.end_date),
     location: event?.location || '',
     city: event?.city || '',
     province: event?.province || '',
@@ -25,10 +31,10 @@
     image: event?.image || '',
     is_public: event?.is_public ?? false,
     registration_open: event?.registration_open ?? true,
-    registration_start: event?.registration_start ? new Date(event.registration_start).toISOString().slice(0, 16) : '',
-    registration_end: event?.registration_end ? new Date(event.registration_end).toISOString().slice(0, 16) : '',
-    checkin_start: event?.checkin_start ? new Date(event.checkin_start).toISOString().slice(0, 16) : '',
-    checkin_end: event?.checkin_end ? new Date(event.checkin_end).toISOString().slice(0, 16) : '',
+    registration_start: formatToLocalDateTime(event?.registration_start),
+    registration_end: formatToLocalDateTime(event?.registration_end),
+    checkin_start: formatToLocalDateTime(event?.checkin_start),
+    checkin_end: formatToLocalDateTime(event?.checkin_end),
     entry_system: event?.entry_system || 'qr',
     status: event?.status || 'draft'
   });

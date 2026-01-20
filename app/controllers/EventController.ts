@@ -4,6 +4,10 @@ import Validator from '../services/Validator';
 import CacheService from '../services/CacheService';
 import { uuidv7 } from "uuidv7";
 import { storeEventSchema, updateEventSchema, eventSettingsSchema, addEventMemberSchema, updateEventMemberSchema } from '../validators/EventValidator';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 class EventController {
   async index(request: Request, response: Response) {
@@ -66,8 +70,8 @@ class EventController {
         slug: data.slug,
         description: data.description || null,
         type: data.type,
-        start_date: new Date(data.start_date).getTime(),
-        end_date: new Date(data.end_date).getTime(),
+        start_date: dayjs(data.start_date).utc().valueOf(),
+        end_date: dayjs(data.end_date).utc().valueOf(),
         location: data.location || null,
         city: data.city || null,
         province: data.province || null,
@@ -77,10 +81,10 @@ class EventController {
         image: data.image || null,
         is_public: data.is_public,
         registration_open: data.registration_open,
-        registration_start: data.registration_start ? new Date(data.registration_start).getTime() : null,
-        registration_end: data.registration_end ? new Date(data.registration_end).getTime() : null,
-        checkin_start: data.checkin_start ? new Date(data.checkin_start).getTime() : null,
-        checkin_end: data.checkin_end ? new Date(data.checkin_end).getTime() : null,
+        registration_start: data.registration_start ? dayjs(data.registration_start).utc().valueOf() : null,
+        registration_end: data.registration_end ? dayjs(data.registration_end).utc().valueOf() : null,
+        checkin_start: data.checkin_start ? dayjs(data.checkin_start).utc().valueOf() : null,
+        checkin_end: data.checkin_end ? dayjs(data.checkin_end).utc().valueOf() : null,
         entry_system: data.entry_system,
         status: data.status,
         created_by: user.id,
@@ -185,8 +189,8 @@ class EventController {
       if (data.slug !== undefined) updateData.slug = data.slug;
       if (data.description !== undefined) updateData.description = data.description;
       if (data.type !== undefined) updateData.type = data.type;
-      if (data.start_date !== undefined) updateData.start_date = new Date(data.start_date).getTime();
-      if (data.end_date !== undefined) updateData.end_date = new Date(data.end_date).getTime();
+      if (data.start_date !== undefined) updateData.start_date = dayjs(data.start_date).utc().valueOf();
+      if (data.end_date !== undefined) updateData.end_date = dayjs(data.end_date).utc().valueOf();
       if (data.location !== undefined) updateData.location = data.location;
       if (data.city !== undefined) updateData.city = data.city;
       if (data.province !== undefined) updateData.province = data.province;
@@ -196,10 +200,10 @@ class EventController {
       if (data.image !== undefined) updateData.image = data.image;
       if (data.is_public !== undefined) updateData.is_public = data.is_public;
       if (data.registration_open !== undefined) updateData.registration_open = data.registration_open;
-      if (data.registration_start !== undefined) updateData.registration_start = data.registration_start ? new Date(data.registration_start).getTime() : null;
-      if (data.registration_end !== undefined) updateData.registration_end = data.registration_end ? new Date(data.registration_end).getTime() : null;
-      if (data.checkin_start !== undefined) updateData.checkin_start = data.checkin_start ? new Date(data.checkin_start).getTime() : null;
-      if (data.checkin_end !== undefined) updateData.checkin_end = data.checkin_end ? new Date(data.checkin_end).getTime() : null;
+      if (data.registration_start !== undefined) updateData.registration_start = data.registration_start ? dayjs(data.registration_start).utc().valueOf() : null;
+      if (data.registration_end !== undefined) updateData.registration_end = data.registration_end ? dayjs(data.registration_end).utc().valueOf() : null;
+      if (data.checkin_start !== undefined) updateData.checkin_start = data.checkin_start ? dayjs(data.checkin_start).utc().valueOf() : null;
+      if (data.checkin_end !== undefined) updateData.checkin_end = data.checkin_end ? dayjs(data.checkin_end).utc().valueOf() : null;
       if (data.entry_system !== undefined) updateData.entry_system = data.entry_system;
       if (data.status !== undefined) updateData.status = data.status;
 
@@ -429,6 +433,10 @@ class EventController {
       .where('event_id', uuid)
       .first();
 
+    if (eventSettings?.custom_fields) {
+      eventSettings.custom_fields = JSON.parse(eventSettings.custom_fields);
+    }
+
     return response.inertia('events/settings', {
       event,
       eventSettings,
@@ -463,10 +471,11 @@ class EventController {
     const settingsData = {
       event_id: uuid,
       require_approval: data.require_approval,
-      custom_fields: data.custom_fields ? JSON.parse(data.custom_fields) : null,
+      custom_fields: data.custom_fields || null,
       allow_self_registration: data.allow_self_registration,
       allow_duplicate_checkin: data.allow_duplicate_checkin,
       require_verification: data.require_verification,
+      enable_gender : data.enable_gender,
       send_confirmation_email: data.send_confirmation_email,
       send_qr_email: data.send_qr_email,
       timezone: data.timezone,
@@ -480,6 +489,7 @@ class EventController {
         .update(settingsData);
     } else {
       await DB.table('event_settings').insert({
+        id : uuid,
         ...settingsData,
         created_at: Date.now()
       });

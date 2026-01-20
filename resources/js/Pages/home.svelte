@@ -51,14 +51,11 @@
       <div class="text-center" in:fly={{ y: 20, duration: 800, delay: 200 }}>
         <div class="flex justify-center mb-6">
           <div class="flex items-center gap-3">
-            <div class="w-16 h-16 bg-primary-500 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30">
-              <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="10" width="35" height="35" rx="8" fill="white" fill-opacity="0.9"/>
-                <rect x="55" y="10" width="35" height="35" rx="8" fill="white" fill-opacity="0.9"/>
-                <rect x="10" y="55" width="35" height="35" rx="8" fill="white" fill-opacity="0.9"/>
-                <rect x="55" y="55" width="35" height="35" rx="8" fill="white" fill-opacity="0.9"/>
-              </svg>
-            </div>
+               <div class="w-16 h-16">
+           
+          <img src="/public/icon-gk.webp" alt="" class="dark:invert dark:brightness-0 dark:contrast-100">
+     
+        </div>
             <h1 class="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               GateKeeper
             </h1>
@@ -69,7 +66,7 @@
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
           <a
-            href="/organizations/create"
+            href="/onboarding"
             use:inertia
             class="inline-flex items-center justify-center px-8 py-4 text-white bg-primary-600 hover:bg-primary-700 rounded-xl font-bold transition-all shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40"
           >
@@ -201,7 +198,7 @@
             Create your first organization and start managing events with GateKeeper
           </p>
           <a
-            href="/organizations/create"
+            href="/onboarding"
             use:inertia
             class="inline-flex items-center px-8 py-4 text-primary-600 bg-white hover:bg-slate-50 rounded-xl font-bold transition-all shadow-lg"
           >

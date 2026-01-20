@@ -1,6 +1,10 @@
 import DB from "../services/DB";
 import { Response, Request } from "../../type";
 import { uuidv7 } from "uuidv7";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 class OnboardingController {
    public async welcome(request: Request, response: Response) {
@@ -133,29 +137,14 @@ class OnboardingController {
                      .redirect("/onboarding/step/2");
                }
 
-               const startDate = new Date(start_date);
-               const endDate = new Date(end_date);
-
                await DB.table("events").insert({
                   id: uuidv7(),
                   organization_id,
                   name,
                   slug,
                   type: type || "conference",
-                  start_date: Date.UTC(
-                     startDate.getFullYear(),
-                     startDate.getMonth(),
-                     startDate.getDate(),
-                     startDate.getHours(),
-                     startDate.getMinutes()
-                  ),
-                  end_date: Date.UTC(
-                     endDate.getFullYear(),
-                     endDate.getMonth(),
-                     endDate.getDate(),
-                     endDate.getHours(),
-                     endDate.getMinutes()
-                  ),
+                  start_date: dayjs(start_date).utc().valueOf(),
+                  end_date: dayjs(end_date).utc().valueOf(),
                   location: location || null,
                   status: "draft",
                   entry_system: "qr",

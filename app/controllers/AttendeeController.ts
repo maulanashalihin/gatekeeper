@@ -66,9 +66,14 @@ class AttendeeController {
       return response.flash('error', 'Event not found').redirect(`/organizations/${orgUuid}/events`, 302);
     }
 
+    const eventSettings = await DB.from('event_settings')
+      .where('event_id', eventUuid)
+      .first();
+
     return response.inertia('attendees/index', {
       attendees,
       event,
+      eventSettings,
       orgUuid
     });
   }
@@ -91,9 +96,14 @@ class AttendeeController {
       return response.flash('error', 'Event not found').redirect(`/organizations/${orgUuid}/events`, 302);
     }
 
+    const eventSettings = await DB.from('event_settings')
+      .where('event_id', eventUuid)
+      .first();
+
     return response.inertia('attendees/form', {
       attendee: null,
       event,
+      eventSettings,
       orgUuid
     });
   }
@@ -135,6 +145,7 @@ class AttendeeController {
         phone: data.phone || null,
         company: data.company || null,
         job_title: data.job_title || null,
+        gender: data.gender || null,
         custom_data: data.custom_data ? JSON.parse(data.custom_data) : null,
         qr_code: qrCode,
         status: 'registered',
@@ -211,9 +222,14 @@ class AttendeeController {
       .where('organization_id', orgUuid)
       .first();
 
+    const eventSettings = await DB.from('event_settings')
+      .where('event_id', eventUuid)
+      .first();
+
     return response.inertia('attendees/form', {
       attendee,
       event,
+      eventSettings,
       orgUuid
     });
   }
@@ -249,6 +265,7 @@ class AttendeeController {
       if (data.phone !== undefined) updateData.phone = data.phone;
       if (data.company !== undefined) updateData.company = data.company;
       if (data.job_title !== undefined) updateData.job_title = data.job_title;
+      if (data.gender !== undefined) updateData.gender = data.gender;
       if (data.custom_data !== undefined) updateData.custom_data = data.custom_data ? JSON.parse(data.custom_data) : null;
       if (data.notes !== undefined) updateData.notes = data.notes;
       if (data.status !== undefined) updateData.status = data.status;

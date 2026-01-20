@@ -46,8 +46,19 @@ class PublicRegistrationController {
       return response.status(404).send('Registration has ended');
     }
 
+    const eventSettings = await DB.from('event_settings')
+      .where('event_id', event.id)
+      .first();
+
+    if (eventSettings?.custom_fields) {
+      eventSettings.custom_fields = JSON.parse(eventSettings.custom_fields);
+    }
+ 
     return response.inertia('public/register', {
-      event
+      event,
+      eventSettings
+    },{
+      app_title : event.name
     });
   }
 
@@ -108,6 +119,7 @@ class PublicRegistrationController {
         phone: data.phone || null,
         company: data.company || null,
         job_title: data.job_title || null,
+        gender: data.gender || null,
         custom_data: data.custom_data ? JSON.parse(data.custom_data) : null,
         qr_code: qrCode,
         status: 'registered',

@@ -4,7 +4,7 @@
   import Alert from '../../Components/Alert.svelte';
   import { ArrowLeft, Save, X, User, Mail, Phone } from 'lucide-svelte';
 
-  let { attendee, event, orgUuid, flash } = $props();
+  let { attendee, event, orgUuid, flash, eventSettings } = $props();
 
   const isEdit = !!attendee;
 
@@ -12,6 +12,7 @@
     name: attendee?.name || '',
     email: attendee?.email || '',
     phone: attendee?.phone || '',
+    gender: attendee?.gender || '',
     notes: attendee?.notes || ''
   });
 
@@ -21,6 +22,7 @@
       name: formData.name || undefined,
       email: formData.email || undefined,
       phone: formData.phone || undefined,
+      gender: formData.gender || undefined,
       notes: formData.notes || undefined
     };
     if (isEdit) {
@@ -100,6 +102,20 @@
                   />
                 </div>
               </div>
+              <!-- Gender -->
+              {#if eventSettings?.enable_gender}
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Jenis Kelamin</label>
+                  <select
+                    bind:value={formData.gender}
+                    class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900/50 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white focus:outline-none focus:border-primary-500"
+                  >
+                    <option value="">Pilih Jenis Kelamin</option>
+                    <option value="male">Laki-laki</option>
+                    <option value="female">Perempuan</option>
+                  </select>
+                </div>
+              {/if}
             </div>
           </div>
 

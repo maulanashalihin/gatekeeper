@@ -136,6 +136,7 @@ export const eventSettingsSchema = z.object({
   require_approval: z.coerce.boolean().default(false),
   custom_fields: z.string().optional(),
   allow_self_registration: z.coerce.boolean().default(true),
+  enable_gender: z.coerce.boolean().default(false),
   allow_duplicate_checkin: z.coerce.boolean().default(false),
   require_verification: z.coerce.boolean().default(false),
   send_confirmation_email: z.coerce.boolean().default(true),
