@@ -47,7 +47,7 @@ class RegisterController {
 
          await DB.table("users").insert(user);
 
-         return Authenticate.process(user, request, response);
+         return Authenticate.process(user, request, response, "/onboarding");
       } catch (error: any) {
          console.error("Registration error:", error);
          

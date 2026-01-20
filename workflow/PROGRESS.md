@@ -142,6 +142,38 @@
 - [x] Header.svelte - Navigation header
 - [x] DarkModeToggle.svelte - Dark mode toggle
 - [x] LajuIcon.svelte - Icon component
+- [x] Autocomplete.svelte - Autocomplete input component (Added: 2025-01-20)
+
+---
+
+## Recent Enhancements (2025-01-20)
+
+### Event Management Enhancements
+- [x] Added venue field to events table migration
+- [x] Added address field to events table migration
+- [x] Added city and province fields to events table migration
+- [x] Fixed EventController to use uuidv7 for event IDs
+- [x] Added city, province, venue to EventValidator
+- [x] Updated EventController to handle city, province, venue
+- [x] Updated events/form.svelte with Autocomplete for location
+- [x] Updated events/form.svelte with venue field
+- [x] Added helper text to form fields (Public Event, Status, Entry System, Event Image URL)
+- [x] Updated onboarding/step.svelte with Autocomplete for location
+- [x] Updated onboarding/step.svelte with venue field
+
+### Ticket Page Enhancements
+- [x] Added venue display to attendees/ticket.svelte
+- [x] Added venue display to public/ticket.svelte
+- [x] Added address display to attendees/ticket.svelte
+- [x] Added address display to public/ticket.svelte
+- [x] Changed Region icon from MapPin to Globe in both ticket pages
+
+### Region Service & Components
+- [x] Created RegionController for region search API
+- [x] Created RegionService for region data handling
+- [x] Created Autocomplete.svelte component for location selection
+- [x] Added GET /api/regions/search route
+- [x] Implemented fuzzy search using Levenshtein distance
 
 ---
 

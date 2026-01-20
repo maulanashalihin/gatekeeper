@@ -136,7 +136,9 @@ GateKeeper follows a **multi-tenant SaaS architecture** with the following compo
   // Event details
   start_date: timestamp (not null)
   end_date: timestamp (not null)
-  location: string (255, nullable)
+  location: string (255, nullable) - Full location string (e.g., "Jakarta, DKI Jakarta")
+  city: string (255, nullable) - City name (e.g., "Jakarta")
+  province: string (255, nullable) - Province name (e.g., "DKI Jakarta")
   venue: string (255, nullable)
   address: text (nullable)
   capacity: integer (nullable)
@@ -459,7 +461,46 @@ GET  /api/events/:uuid/stats                  - Event statistics (JSON)
 GET  /api/events/:uuid/checkin/realtime       - Real-time check-in data (JSON)
 POST /api/attendees/:uuid/checkin             - Check-in attendee (JSON)
 GET  /api/attendees/:qr_code/info             - Get attendee info by QR code (JSON)
+GET  /api/regions/search                      - Search Indonesian cities/provinces (JSON)
 ```
+
+### 3.10 Region Service Routes
+
+```
+GET  /api/regions/search?q={query}&limit={limit}&threshold={threshold} - Search regions/cities
+```
+
+**Response Format:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "kota": "Jakarta",
+      "provinsi": "DKI Jakarta",
+      "score": 1.0
+    }
+  ]
+}
+```
+
+**RegionService Methods:**
+- `searchKota(query, limit, threshold)` - Fuzzy search for cities using Levenshtein distance
+- `getAllProvinces()` - Get all Indonesian provinces
+- `getKotaByProvince(province)` - Get cities by province
+- `getAllKota()` - Get all cities with provinces
+
+**RegionController:**
+- `search(request, response)` - Handles region search API endpoint
+- Validates query parameter `q` (minimum 2 characters)
+- Returns matching cities/provinces with similarity scores
+- Supports optional `limit` (default: 10) and `threshold` (default: 0.5) parameters
+
+**Autocomplete Component:**
+- Reusable Svelte component for autocomplete inputs
+- Props: `value`, `label`, `placeholder`, `apiUrl`, `displayField`, `disabled`, `onChange`, `onSelect`
+- Debounced API calls for performance
+- Used in event forms and onboarding for location selection
 
 ## 4. Data Models & Flow
 

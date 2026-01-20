@@ -2,6 +2,7 @@ import { Request, Response } from "../../type";
 import DB from '../services/DB';
 import Validator from '../services/Validator';
 import CacheService from '../services/CacheService';
+import { uuidv7 } from "uuidv7";
 import { storeEventSchema, updateEventSchema, eventSettingsSchema, addEventMemberSchema, updateEventMemberSchema } from '../validators/EventValidator';
 
 class EventController {
@@ -59,6 +60,7 @@ class EventController {
 
     try {
       await DB.table('events').insert({
+        id: uuidv7(),
         organization_id: orgUuid,
         name: data.name,
         slug: data.slug,
@@ -67,6 +69,8 @@ class EventController {
         start_date: new Date(data.start_date).getTime(),
         end_date: new Date(data.end_date).getTime(),
         location: data.location || null,
+        city: data.city || null,
+        province: data.province || null,
         venue: data.venue || null,
         address: data.address || null,
         capacity: data.capacity || null,
@@ -90,10 +94,17 @@ class EventController {
 
       return response.flash('success', 'Event created successfully').redirect(`/organizations/${orgUuid}/events`, 302);
     } catch (error: any) {
+      console.error('Error creating event:', error);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+      
       if (error.message && error.message.includes('UNIQUE constraint')) {
         return response.flash('error', 'Slug already exists').redirect(`/organizations/${orgUuid}/events/create`, 302);
       }
-      return response.flash('error', 'Failed to create event').redirect(`/organizations/${orgUuid}/events/create`, 302);
+      if (error.message && error.message.includes('no such column')) {
+        return response.flash('error', 'Database schema error: ' + error.message).redirect(`/organizations/${orgUuid}/events/create`, 302);
+      }
+      return response.flash('error', 'Failed to create event: ' + (error.message || 'Unknown error')).redirect(`/organizations/${orgUuid}/events/create`, 302);
     }
   }
 
@@ -177,6 +188,8 @@ class EventController {
       if (data.start_date !== undefined) updateData.start_date = new Date(data.start_date).getTime();
       if (data.end_date !== undefined) updateData.end_date = new Date(data.end_date).getTime();
       if (data.location !== undefined) updateData.location = data.location;
+      if (data.city !== undefined) updateData.city = data.city;
+      if (data.province !== undefined) updateData.province = data.province;
       if (data.venue !== undefined) updateData.venue = data.venue;
       if (data.address !== undefined) updateData.address = data.address;
       if (data.capacity !== undefined) updateData.capacity = data.capacity;

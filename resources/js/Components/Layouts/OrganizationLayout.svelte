@@ -1,17 +1,18 @@
 <script lang="ts">
-  import { page } from '@inertiajs/svelte';
-  import { Home, Calendar, Users, Settings, LogOut, User, Bell, ChevronRight, Menu, X } from 'lucide-svelte';
+  import { page, inertia } from '@inertiajs/svelte';
+  import { Home, Calendar, Users, Settings, LogOut, User, Bell, ChevronRight, Menu, X, ChevronDown } from 'lucide-svelte';
   import DarkModeToggle from '../DarkModeToggle.svelte';
   
   let sidebarOpen = $state(true);
-  let { group } = $props();
+  let profileDropdownOpen = $state(false);
+  let { group, orgId, children } = $props();
   
-  const navigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: Home, group: 'dashboard' },
-    { name: 'Events', href: '/organizations', icon: Calendar, group: 'events' },
-    { name: 'Team Members', href: '/organizations', icon: Users, group: 'team' },
-    { name: 'Settings', href: '/organizations', icon: Settings, group: 'settings' },
-  ];
+  const navigation = $derived([
+    { name: 'Dashboard', href: `/organizations/${orgId}/dashboard`, icon: Home, group: 'dashboard' },
+    { name: 'Events', href: `/organizations/${orgId}/events`, icon: Calendar, group: 'events' },
+    { name: 'Team Members', href: `/organizations/${orgId}/members`, icon: Users, group: 'team' },
+    { name: 'Settings', href: `/organizations/${orgId}/edit`, icon: Settings, group: 'settings' },
+  ]);
 </script>
 
 <div class="min-h-screen bg-slate-50 dark:bg-slate-950">
@@ -19,25 +20,25 @@
   {#if !sidebarOpen}
     <div 
       class="fixed inset-0 z-40 bg-black/50 lg:hidden"
-      on:click={() => sidebarOpen = true}
+      onclick={() => sidebarOpen = true}
     ></div>
   {/if}
   
   <!-- Sidebar -->
   <aside 
-    class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-transform duration-300 lg:translate-x-0 {sidebarOpen ? '-translate-x-full' : 'translate-x-0'}"
+    class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 transition-transform duration-300 lg:translate-x-0 {sidebarOpen ? 'translate-x-0' : '-translate-x-full'}"
   >
     <!-- Logo -->
     <div class="flex items-center justify-between h-16 px-6 border-b border-slate-200 dark:border-slate-800">
       <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-lg">G</span>
+           <div class="w-8 h-8 flex items-center justify-center">
+         <img src="/public/icon-gk.webp" alt="" class="dark:invert dark:brightness-0 dark:contrast-100">
         </div>
         <span class="font-display font-semibold text-slate-900 dark:text-white">GateKeeper</span>
       </div>
       <button 
         class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-        on:click={() => sidebarOpen = true}
+        onclick={() => sidebarOpen = false}
       >
         <X class="w-5 h-5" />
       </button>
@@ -55,7 +56,8 @@
           }"
         >
           {#if item.icon}
-            <svelte:component this={item.icon} class="w-5 h-5" />
+            {@const Icon = item.icon}
+            <Icon class="w-5 h-5" />
           {/if}
           {item.name}
           {#if item.group === group}
@@ -72,8 +74,8 @@
           <User class="w-5 h-5 text-secondary-600 dark:text-secondary-400" />
         </div>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium text-slate-900 dark:text-white truncate">John Doe</p>
-          <p class="text-xs text-slate-500 dark:text-slate-400 truncate">john@example.com</p>
+          <p class="text-sm font-medium text-slate-900 dark:text-white truncate">{$page.props.auth?.user?.name || 'User'}</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 truncate">{$page.props.auth?.user?.email || ''}</p>
         </div>
       </div>
     </div>
@@ -87,7 +89,7 @@
         <div class="flex items-center gap-4">
           <button 
             class="lg:hidden p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-            on:click={() => sidebarOpen = false}
+            onclick={() => sidebarOpen = false}
           >
             <Menu class="w-5 h-5" />
           </button>
@@ -106,11 +108,35 @@
           
           <!-- Profile Dropdown -->
           <div class="relative">
-            <button class="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <button 
+              class="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              onclick={() => profileDropdownOpen = !profileDropdownOpen}
+            >
               <div class="w-8 h-8 bg-secondary-100 dark:bg-secondary-900/30 rounded-full flex items-center justify-center">
                 <User class="w-4 h-4 text-secondary-600 dark:text-secondary-400" />
               </div>
+              <ChevronDown class="w-4 h-4 text-slate-600 dark:text-slate-400" />
             </button>
+            
+            {#if profileDropdownOpen}
+              <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-900 rounded-lg shadow-lg border border-slate-200 dark:border-slate-800 py-1 z-50">
+                <a 
+                  href="/profile"
+                  class="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                >
+                  <User class="w-4 h-4" />
+                  Profile
+                </a>
+                <a 
+                  href="/logout"
+                  use:inertia="{{method : 'post'}}"
+                  class="flex items-center gap-2 px-4 py-2 text-sm text-error-600 dark:text-error-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                >
+                  <LogOut class="w-4 h-4" />
+                  Logout
+                </a>
+              </div>
+            {/if}
           </div>
         </div>
       </div>
@@ -118,7 +144,7 @@
     
     <!-- Page Content -->
     <main class="p-4 sm:p-6 lg:p-8">
-      <slot />
+      {@render children?.()}
     </main>
   </div>
 </div>

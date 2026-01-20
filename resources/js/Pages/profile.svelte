@@ -1,7 +1,7 @@
 <script>
-  import Header from "../Components/Header.svelte";
+  import UserLayout from "../Components/Layouts/UserLayout.svelte";
   import { Toast } from "../Components/helper";
-  import { page, router } from '@inertiajs/svelte';
+  import { router } from '@inertiajs/svelte';
 
   let { flash, user } = $props();
 
@@ -99,10 +99,9 @@
   }
 </script>
 
-<Header group="profile" />
-
-{#if flash?.error || flash?.success}
-  <div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4">
+<UserLayout group="profile">
+  {#if flash?.error || flash?.success}
+    <div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-md px-4">
     {#if flash?.error}
       <div class="bg-red-500 text-white rounded-lg shadow-lg p-4 flex items-center gap-3 animate-in slide-in-from-top-2 duration-300">
         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -370,3 +369,4 @@
     </div>
   </div>
 </div>
+</UserLayout>

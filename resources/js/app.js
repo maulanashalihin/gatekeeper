@@ -11,6 +11,10 @@ createInertiaApp({
     el.classList.add('dark:bg-gray-900', 'min-h-screen');
     mount(App, { target: el, props })
   },
+  progress: {
+    color: '#6366F1',
+    showSpinner: true,
+  },
 })
 
 const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

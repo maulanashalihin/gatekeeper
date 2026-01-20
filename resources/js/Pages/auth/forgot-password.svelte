@@ -1,6 +1,7 @@
 <script>
   import { inertia, router } from "@inertiajs/svelte"
-  import LajuIcon from "../../Components/LajuIcon.svelte"
+  import { Calendar } from 'lucide-svelte'
+  import DarkModeToggle from '../../Components/DarkModeToggle.svelte'
 
   let form = $state({
     email: "",
@@ -20,26 +21,34 @@
   }
 </script>
 
-<section class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+<section class="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center">
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/20 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/10 dark:bg-primary-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 dark:bg-purple-500/20 rounded-full blur-3xl"></div>
   </div>
 
   <div class="w-full max-w-md px-6 relative z-10">
-    <div class="flex justify-center mb-8">
-      <LajuIcon />
+    <div class="flex justify-between items-center mb-8">
+      <div class="flex-1"></div>
+      <DarkModeToggle />
+      <div class="flex-1"></div>
     </div>
 
-    <div class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-slate-700/50 p-8 shadow-2xl">
+    <div class="flex justify-center mb-8">
+      <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30">
+        <Calendar class="w-8 h-8 text-white" />
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-slate-700/50 p-8 shadow-2xl">
       <div class="text-center mb-8">
         <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-500/20 flex items-center justify-center">
-          <svg class="w-8 h-8 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
           </svg>
         </div>
-        <h2 class="text-2xl font-bold text-white">Forgot password?</h2>
-        <p class="text-slate-400 mt-2">No worries, we'll send you reset instructions</p>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Forgot password?</h2>
+        <p class="text-gray-600 dark:text-slate-400 mt-2">No worries, we'll send you reset instructions</p>
       </div>
 
       {#if flash?.error}
@@ -62,10 +71,10 @@
 
       <form class="space-y-6" onsubmit={(e) => { e.preventDefault(); submitForm(); }}>
         <div class="space-y-2">
-          <label for="email" class="block text-sm font-medium text-slate-300">Email address</label>
+          <label for="email" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Email address</label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-5 h-5 text-gray-500 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
@@ -74,7 +83,7 @@
               type="email"
               name="email"
               id="email"
-              class="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-200"
+              class="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900/50 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary-500 transition-all duration-200"
               placeholder="you@example.com"
               required
             />
@@ -84,7 +93,7 @@
         <button
           type="submit"
           disabled={isLoading}
-          class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {#if isLoading}
             <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24">
@@ -99,7 +108,7 @@
       </form>
 
       <div class="mt-8 text-center">
-        <a href="/login" use:inertia class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors">
+        <a href="/login" use:inertia class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white transition-colors">
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>

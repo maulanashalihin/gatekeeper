@@ -31,8 +31,8 @@
     <!-- Logo -->
     <div class="flex items-center justify-between h-16 px-6 border-b border-slate-200 dark:border-slate-800">
       <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-lg">G</span>
+           <div class="w-8 h-8 flex items-center justify-center">
+         <img src="/public/icon-gk.webp" alt="" class="dark:invert dark:brightness-0 dark:contrast-100">
         </div>
         <span class="font-display font-semibold text-slate-900 dark:text-white">GateKeeper</span>
       </div>

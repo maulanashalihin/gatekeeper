@@ -13,6 +13,8 @@ export async function up(knex: Knex): Promise<void> {
         table.timestamp('start_date').notNullable()
         table.timestamp('end_date').notNullable()
         table.string('location', 255).nullable()
+        table.string('city', 255).nullable()
+        table.string('province', 255).nullable()
         table.string('venue', 255).nullable()
         table.text('address').nullable()
         table.integer('capacity').nullable()

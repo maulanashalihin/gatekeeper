@@ -1,7 +1,9 @@
 <script>
   import { inertia, router } from '@inertiajs/svelte'
   import { password_generator } from '../../Components/helper'
-  import LajuIcon from '../../Components/LajuIcon.svelte'
+  import { Calendar, Users, QrCode, BarChart3, Zap, Shield, Layout } from 'lucide-svelte'
+  import Alert from '../../Components/Alert.svelte'
+  import DarkModeToggle from '../../Components/DarkModeToggle.svelte'
 
   let form = $state({
     email: '',
@@ -52,56 +54,55 @@
   }
 </script>
 
-<section class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex">
+<section class="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex">
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/20 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/10 dark:bg-primary-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 dark:bg-purple-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-500/5 dark:bg-primary-500/10 rounded-full blur-3xl"></div>
   </div>
 
   <div class="hidden lg:flex lg:w-1/2 relative items-center justify-center p-12">
+    <div class="absolute top-6 right-6">
+      <DarkModeToggle />
+    </div>
     <div class="relative z-10 max-w-lg">
       <div class="mb-8">
-        <LajuIcon />
+        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30">
+          <Calendar class="w-8 h-8 text-white" />
+        </div>
       </div>
-      <h1 class="text-4xl font-bold text-white mb-4">
-        Start building today
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Start managing events
       </h1>
-      <p class="text-slate-400 text-lg leading-relaxed">
-        Join developers who build blazing-fast applications with the hyper-performance TypeScript framework.
+      <p class="text-gray-600 dark:text-slate-400 text-lg leading-relaxed">
+        Join thousands of event organizers who use GateKeeper to streamline check-ins, track attendees, and analyze event performance.
       </p>
       <div class="mt-12 space-y-4">
         <div class="flex items-center gap-4">
           <div class="w-10 h-10 rounded-lg bg-primary-500/20 flex items-center justify-center">
-            <svg class="w-5 h-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+            <Zap class="w-5 h-5 text-primary-600 dark:text-primary-400" />
           </div>
           <div>
-            <div class="text-white font-medium">Lightning Fast</div>
-            <div class="text-sm text-slate-500">Built on HyperExpress for maximum performance</div>
+            <div class="text-gray-900 dark:text-white font-medium">Fast Check-ins</div>
+            <div class="text-sm text-gray-500 dark:text-slate-500">QR code scanning for instant verification</div>
           </div>
         </div>
         <div class="flex items-center gap-4">
           <div class="w-10 h-10 rounded-lg bg-primary-500/20 flex items-center justify-center">
-            <svg class="w-5 h-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
+            <Users class="w-5 h-5 text-primary-600 dark:text-primary-400" />
           </div>
           <div>
-            <div class="text-white font-medium">Type Safe</div>
-            <div class="text-sm text-slate-500">Full TypeScript support out of the box</div>
+            <div class="text-gray-900 dark:text-white font-medium">Attendee Management</div>
+            <div class="text-sm text-gray-500 dark:text-slate-500">Easy import and tracking of all attendees</div>
           </div>
         </div>
         <div class="flex items-center gap-4">
           <div class="w-10 h-10 rounded-lg bg-primary-500/20 flex items-center justify-center">
-            <svg class="w-5 h-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-            </svg>
+            <BarChart3 class="w-5 h-5 text-primary-600 dark:text-primary-400" />
           </div>
           <div>
-            <div class="text-white font-medium">Modern Stack</div>
-            <div class="text-sm text-slate-500">Svelte 5 + Inertia.js + TailwindCSS</div>
+            <div class="text-gray-900 dark:text-white font-medium">Real-time Analytics</div>
+            <div class="text-sm text-gray-500 dark:text-slate-500">Track attendance and event performance</div>
           </div>
         </div>
       </div>
@@ -110,36 +111,28 @@
 
   <div class="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
     <div class="w-full max-w-md">
-      <div class="lg:hidden mb-8 flex justify-center">
-        <LajuIcon />
+      <div class="lg:hidden mb-8 flex justify-between items-center">
+        <div class="flex-1"></div>
+        <DarkModeToggle />
+        <div class="flex-1"></div>
       </div>
 
-      <div class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-slate-700/50 p-8 shadow-2xl">
+      <div class="bg-white dark:bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-slate-700/50 p-8 shadow-2xl">
         <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-white">Create account</h2>
-          <p class="text-slate-400 mt-2">Get started with your free account</p>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Create account</h2>
+          <p class="text-gray-600 dark:text-slate-400 mt-2">Get started with your free account</p>
         </div>
 
         {#if flash?.error}
-          <div class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3">
-            <svg class="w-5 h-5 text-red-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="text-red-400 text-sm">{flash.error}</span>
-          </div>
+          <Alert type="error" message={flash.error} />
         {/if}
 
         {#if serverError}
-          <div class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3">
-            <svg class="w-5 h-5 text-red-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="text-red-400 text-sm">{serverError}</span>
-          </div>
+          <Alert type="error" message={serverError} />
         {/if}
 
         <a href="/google/redirect" 
-           class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-slate-600 bg-slate-700/50 text-white font-medium hover:bg-slate-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-slate-800">
+           class="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-600 bg-gray-100 dark:bg-slate-700/50 text-gray-900 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-800">
           <svg class="h-5 w-5" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
             <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -151,19 +144,19 @@
 
         <div class="relative my-6">
           <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-slate-700"></div>
+            <div class="w-full border-t border-gray-300 dark:border-slate-700"></div>
           </div>
           <div class="relative flex justify-center">
-            <span class="px-4 text-sm text-slate-500 bg-slate-800/50">or sign up with email</span>
+            <span class="px-4 text-sm text-gray-500 dark:text-slate-500 bg-white dark:bg-slate-800/50">or sign up with email</span>
           </div>
         </div>
 
         <form class="space-y-4" onsubmit={(e) => { e.preventDefault(); submitForm(); }}>
           <div class="space-y-2">
-            <label for="name" class="block text-sm font-medium text-slate-300">Full Name</label>
+            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Full Name</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-5 h-5 text-gray-500 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
@@ -173,17 +166,17 @@
                 type="text" 
                 name="name" 
                 id="name" 
-                class="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-200" 
+                class="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900/50 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary-500" 
                 placeholder="John Doe"
               />
             </div>
           </div>
 
           <div class="space-y-2">
-            <label for="email" class="block text-sm font-medium text-slate-300">Email</label>
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Email</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-5 h-5 text-gray-500 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
@@ -193,17 +186,17 @@
                 type="email" 
                 name="email" 
                 id="email" 
-                class="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-200" 
+                class="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900/50 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary-500" 
                 placeholder="you@example.com"
               />
             </div>
           </div>
 
           <div class="space-y-2">
-            <label for="password" class="block text-sm font-medium text-slate-300">Password</label>
+            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Password</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-5 h-5 text-gray-500 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
@@ -213,13 +206,13 @@
                 type={showPassword ? 'text' : 'password'} 
                 name="password" 
                 id="password" 
-                placeholder="••••••••" 
-                class="w-full pl-12 pr-12 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-200"
+                placeholder="•••••••••" 
+                class="w-full pl-12 pr-12 py-3 rounded-xl bg-gray-50 dark:bg-slate-900/50 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary-500"
               />
               <button 
                 type="button" 
                 onclick={() => showPassword = !showPassword}
-                class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-slate-300 transition-colors"
+                class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-300 transition-colors"
               >
                 {#if showPassword}
                   <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -236,20 +229,20 @@
             <button 
               type="button" 
               onclick={generatePassword}
-              class="text-xs text-primary-400 hover:text-primary-300 transition-colors flex items-center gap-1"
+              class="text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors flex items-center gap-1"
             >
               <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
               Generate secure password
             </button>
           </div>
 
           <div class="space-y-2">
-            <label for="confirm-password" class="block text-sm font-medium text-slate-300">Confirm Password</label>
+            <label for="confirm-password" class="block text-sm font-medium text-gray-700 dark:text-slate-300">Confirm Password</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-5 h-5 text-gray-500 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
@@ -259,8 +252,8 @@
                 type={showPassword ? 'text' : 'password'} 
                 name="confirm-password" 
                 id="confirm-password" 
-                placeholder="••••••••" 
-                class="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-200"
+                placeholder="•••••••••" 
+                class="w-full pl-12 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900/50 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:border-primary-500"
               />
             </div>
             {#if passwordError}
@@ -271,7 +264,7 @@
           <button 
             type="submit" 
             disabled={isLoading}
-            class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6"
+            class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-800 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6"
           >
             {#if isLoading}
               <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24">
@@ -285,9 +278,9 @@
           </button>
         </form>
 
-        <p class="mt-6 text-center text-sm text-slate-400">
+        <p class="mt-6 text-center text-sm text-gray-600 dark:text-slate-400">
           Already have an account? 
-          <a href="/login" use:inertia class="text-primary-400 hover:text-primary-300 font-medium transition-colors">
+          <a href="/login" use:inertia class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors">
             Sign in
           </a>
         </p>

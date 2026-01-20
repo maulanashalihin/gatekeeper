@@ -32,9 +32,11 @@ Build a modern, scalable SaaS platform for event ticketing and attendance manage
 ### 2.2 Event Management
 - Create/Edit/Delete events
 - Event types: Conference, Workshop, Concert, Seminar, Webinar, Meetup, Exhibition, Sports Event
-- Event details: Name, description, date/time, location, capacity
+- Event details: Name, description, date/time, location, city, province, venue, address, capacity
 - Event settings: Registration open/close, check-in start/end, public/private
-- Event images and branding
+- Event images and branding (banner image displayed on event detail page and tickets)
+- **Location Autocomplete**: Smart autocomplete for Indonesian cities and provinces using RegionService
+- **Enhanced Form UX**: Helper text for all form fields (Public Event, Status, Entry System, Event Image URL) to improve user understanding
 
 ### 2.3 Attendee Management
 - **Admin Input**: Bulk import via CSV/Excel, manual entry

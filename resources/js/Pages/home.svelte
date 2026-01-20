@@ -1,140 +1,215 @@
-<!-- home.svelte -->
 <script>
   import { inertia } from '@inertiajs/svelte'
   import { fly, fade } from 'svelte/transition'
   import { page } from '@inertiajs/svelte'
-  import Header from '../Components/Header.svelte'
+  import UserLayout from '../Components/Layouts/UserLayout.svelte'
+  import { Building2, Calendar, Users, QrCode, ArrowRight, Plus, CheckCircle, Shield, Zap } from 'lucide-svelte'
   
+  let { user, organizations } = $props()
+
   let features = [
     {
-      title: "Powerful Features",
-      description: "Built with modern tools for maximum productivity",
-      icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />`
+      title: "Event Management",
+      description: "Create and manage events with ease",
+      icon: Calendar
     },
     {
-      title: "Dark Mode Support",
-      description: "Seamless dark mode integration for better viewing",
-      icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />`
+      title: "Smart Check-in",
+      description: "QR code-based attendee check-in system",
+      icon: QrCode
     },
     {
-      title: "Modern UI/UX",
-      description: "Beautiful interfaces with smooth animations",
-      icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />`
+      title: "Team Collaboration",
+      description: "Invite team members and assign roles",
+      icon: Users
+    },
+    {
+      title: "Real-time Analytics",
+      description: "Track attendance and event insights",
+      icon: CheckCircle
+    },
+    {
+      title: "Secure Platform",
+      description: "Enterprise-grade security for your data",
+      icon: Shield
+    },
+    {
+      title: "Fast Performance",
+      description: "Built for speed and reliability",
+      icon: Zap
     }
   ]
 </script>
 
-<Header group="home" />
+<UserLayout group="home">
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <div class="absolute top-0 -left-4 w-72 h-72 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob dark:mix-blend-normal dark:opacity-10"></div>
+    <div class="absolute top-0 -right-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 dark:mix-blend-normal dark:opacity-10"></div>
 
-<!-- Hero Section -->
-<div class="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950">
-  <div class="absolute top-0 -left-4 w-72 h-72 bg-brand-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob dark:mix-blend-normal dark:opacity-10"></div>
-  <div class="absolute top-0 -right-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 dark:mix-blend-normal dark:opacity-10"></div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 relative z-10">
-    <div class="text-center" in:fly={{ y: 20, duration: 800, delay: 200 }}>
-      <h1 class="flex justify-center">
-          <div class="flex items-center gap-2 mb-4">
-                        <svg width="40" height="40" viewBox="0 0 100 100" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M30 10 H65 L55 50 H20 Z" fill="url(#grad1)" />
-                            <path d="M20 58 H85 L75 90 H10 Z" fill="url(#grad1)" />
-                            <rect x="70" y="58" width="20" height="32" transform="skewX(-14)" fill="white"
-                                fill-opacity="0.1" />
-                        </svg>
-                        <div class="text-4xl font-black tracking-tighter italic">Laju<span
-                                class="text-brand-500">.dev</span></div>
-                    </div>
-      </h1>
-      <p class="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8">
-        A high-performance TypeScript web framework for building modern full-stack applications with speed and elegance.
-      </p>
-      <div class="flex justify-center gap-4">
-        <a
-          href="https://github.com/maulanashalihin/laju/tree/main/docs"
-           target="_blank"
-          class="px-6 py-3 text-white bg-brand-600 hover:bg-brand-700 rounded-xl font-medium transition-all shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40"
-        >
-          Get Started
-        </a>
-        <a
-          href="https://deepwiki.com/maulanashalihin/laju"
-           target="_blank"
-          class="px-6 py-3 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 rounded-xl font-medium transition-colors"
-        >
-          Learn More
-        </a>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center" in:fly={{ y: 20, duration: 800, delay: 200 }}>
+        <div class="flex justify-center mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-16 h-16 bg-primary-500 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30">
+              <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="35" height="35" rx="8" fill="white" fill-opacity="0.9"/>
+                <rect x="55" y="10" width="35" height="35" rx="8" fill="white" fill-opacity="0.9"/>
+                <rect x="10" y="55" width="35" height="35" rx="8" fill="white" fill-opacity="0.9"/>
+                <rect x="55" y="55" width="35" height="35" rx="8" fill="white" fill-opacity="0.9"/>
+              </svg>
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+              GateKeeper
+            </h1>
+          </div>
+        </div>
+        <p class="text-xl sm:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-8">
+          Modern event management platform with smart check-in and team collaboration features
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="/organizations/create"
+            use:inertia
+            class="inline-flex items-center justify-center px-8 py-4 text-white bg-primary-600 hover:bg-primary-700 rounded-xl font-bold transition-all shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40"
+          >
+            <Plus class="w-5 h-5 mr-2" />
+            Create Organization
+          </a>
+          <a
+            href="/organizations"
+            use:inertia
+            class="inline-flex items-center justify-center px-8 py-4 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 rounded-xl font-bold transition-colors"
+          >
+            View Organizations
+            <ArrowRight class="w-5 h-5 ml-2" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Features Section -->
-<div class="py-24 bg-white dark:bg-slate-950">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid md:grid-cols-3 gap-8">
-      {#each features as feature, i}
-        <div 
-          class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-brand-500/50 dark:hover:border-brand-500/50 hover:shadow-lg transition-all duration-300 group"
-          in:fly={{ y: 20, duration: 800, delay: 200 + (i * 100) }}
-        >
-          <div class="w-12 h-12 bg-brand-100 dark:bg-brand-900/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6 text-brand-600 dark:text-brand-400"
-            >
-              {@html feature.icon}
-            </svg>
+  <!-- Quick Actions - Your Organizations -->
+  {#if organizations && organizations.length > 0}
+    <div class="py-12 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              Your Organizations
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400">
+              Quick access to your organizations
+            </p>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
-            {feature.title}
-          </h3>
-          <p class="text-slate-600 dark:text-slate-400">
-            {feature.description}
-          </p>
+          <a
+            href="/organizations"
+            use:inertia
+            class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg font-medium transition-colors"
+          >
+            View All
+            <ArrowRight class="w-4 h-4" />
+          </a>
         </div>
-      {/each}
-    </div>
-  </div>
-</div>
 
-<!-- CTA Section -->
-<div class="py-24 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div in:fly={{ y: 20, duration: 800 }}>
-      <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">
-        Ready to Get Started?
-      </h2>
-      <p class="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto">
-        Join us and experience the next generation of development tools.
-      </p>
-      <a
-        href="/register"
-        use:inertia
-        class="inline-flex items-center px-8 py-4 text-white bg-brand-600 hover:bg-brand-700 rounded-xl font-bold transition-all shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40"
-      >
-        Create Account
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-5 h-5 ml-2"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-        </svg>
-      </a>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {#each organizations as org}
+            <a
+              href={`/organizations/${org.id}/dashboard`}
+              use:inertia
+              class="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
+            >
+              <div class="flex items-start justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Building2 class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-600 capitalize">
+                  {org.role}
+                </span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                {org.name}
+              </h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
+                {org.description || 'No description'}
+              </p>
+              <div class="flex items-center text-sm text-slate-500 dark:text-slate-400">
+                <ArrowRight class="w-4 h-4 mr-1 group-hover:translate-x-1 transition-transform" />
+                Open Dashboard
+              </div>
+            </a>
+          {/each}
+        </div>
+
+        <div class="mt-6 text-center sm:hidden">
+          <a
+            href="/organizations"
+            use:inertia
+            class="inline-flex items-center gap-2 px-6 py-3 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg font-medium transition-colors"
+          >
+            View All Organizations
+            <ArrowRight class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  {/if}
+
+  <!-- Features Section -->
+  <div class="py-16 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+          Powerful Features
+        </h2>
+        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          Everything you need to manage events efficiently
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {#each features as feature, i}
+          {@const Icon = feature.icon}
+          <div 
+            class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary-500/50 dark:hover:border-primary-500/50 hover:shadow-lg transition-all duration-300 group"
+            in:fly={{ y: 20, duration: 800, delay: 200 + (i * 100) }}
+          >
+            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <Icon class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
+              {feature.title}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-400">
+              {feature.description}
+            </p>
+          </div>
+        {/each}
+      </div>
     </div>
   </div>
-</div>
+
+  <!-- CTA Section -->
+  <div class="py-16 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-gradient-to-r from-primary-600 to-purple-600 rounded-3xl p-8 sm:p-12 text-center shadow-xl shadow-primary-500/20">
+        <div in:fly={{ y: 20, duration: 800 }}>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+            Ready to Get Started?
+          </h2>
+          <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            Create your first organization and start managing events with GateKeeper
+          </p>
+          <a
+            href="/organizations/create"
+            use:inertia
+            class="inline-flex items-center px-8 py-4 text-primary-600 bg-white hover:bg-slate-50 rounded-xl font-bold transition-all shadow-lg"
+          >
+            <Plus class="w-5 h-5 mr-2" />
+            Create Organization
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</UserLayout>

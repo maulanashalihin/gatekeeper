@@ -38,7 +38,26 @@ class ProfileController {
    }
 
    public async homePage(request: Request, response: Response) {
-      return response.inertia("home");
+      const user = request.user;
+      if (!user) {
+         return response.redirect("/login");
+      }
+
+      const organizations = await DB.from("organization_members")
+         .join("organizations", "organization_members.organization_id", "organizations.id")
+         .where("organization_members.user_id", user.id)
+         .select(
+            "organizations.id",
+            "organizations.name",
+            "organizations.slug",
+            "organizations.description",
+            "organization_members.role",
+            "organizations.created_at"
+         )
+         .orderBy("organizations.created_at", "desc")
+         .limit(3);
+
+      return response.inertia("home", { user, organizations });
    }
 
    public async deleteUsers(request: Request, response: Response) {
