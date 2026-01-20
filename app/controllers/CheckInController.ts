@@ -149,20 +149,26 @@ class CheckInController {
     const eventUuid = request.params.event_uuid;
     const attendeeId = request.params.attendee_uuid;
 
+    console.log('[CheckInController] checkin called:', { eventUuid, attendeeId, userId: user?.id });
+
     if (!user) {
       return response.redirect('/login', 302);
     }
 
     const attendee = await DB.from('attendees')
-      .where('id', attendeeId)
+      .where('id', attendeeId) 
       .where('event_id', eventUuid)
       .first();
 
+    console.log('[CheckInController] attendee found:', !!attendee);
+
     if (!attendee) {
+      console.log('[CheckInController] Attendee not found');
       return response.status(404).json({ success: false, message: 'Attendee not found' });
     }
 
     if (attendee.status === 'checked_in') {
+      console.log('[CheckInController] Attendee already checked in');
       return response.status(400).json({
         success: false,
         message: 'Attendee already checked in',
@@ -180,6 +186,7 @@ class CheckInController {
         .first();
 
       if (existingCheckIn) {
+        console.log('[CheckInController] Duplicate check-in not allowed');
         return response.status(400).json({
           success: false,
           message: 'Duplicate check-in not allowed',
@@ -188,6 +195,7 @@ class CheckInController {
       }
     }
 
+    console.log('[CheckInController] Inserting check-in record');
     await DB.table('check_ins').insert({
       attendee_id: attendeeId,
       event_id: eventUuid,
@@ -197,6 +205,7 @@ class CheckInController {
       created_at: Date.now()
     });
 
+    console.log('[CheckInController] Updating attendee status');
     await DB.from('attendees')
       .where('id', attendeeId)
       .update({
@@ -206,6 +215,7 @@ class CheckInController {
         updated_at: Date.now()
       });
 
+    console.log('[CheckInController] Check-in successful');
     return response.json({
       success: true,
       message: 'Check-in successful',

@@ -91,6 +91,7 @@
     scanResult = null;
 
     try {
+      console.log('[Scanner] Scanning QR code:', qrCode);
       const response = await fetch(`/organizations/${orgUuid}/events/${event.id}/checkin/${qrCode}`, {
         method: 'POST',
         headers: {
@@ -99,7 +100,10 @@
         }
       });
 
+      console.log('[Scanner] Response status:', response.status);
+
       const data = await response.json();
+      console.log('[Scanner] Response data:', data);
 
       scanResult = data;
 
@@ -109,6 +113,7 @@
         }, 3000);
       }
     } catch (error) {
+      console.error('[Scanner] Error:', error);
       scanResult = {
         success: false,
         message: 'Failed to scan QR code'
